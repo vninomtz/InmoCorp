@@ -1,2 +1,6 @@
 inmocorp\inmobiliaria\MainApp.class
+DAO\ConexionBD.class
+DAO\IInmuebleDao.class
 controlador\FXMLController.class
+modelo\Inmueble.class
+controlador\RegistrarRentaController.class
