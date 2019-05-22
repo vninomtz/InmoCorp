@@ -21,42 +21,24 @@ import javafx.fxml.Initializable;
  */
 public class RegistrarRentaController implements Initializable {
 
-    @FXML
-    private JFXButton btnBuscar;
-    @FXML
-    private JFXTextField txtCodigoInmu;
-    @FXML
-    private JFXTextField txtEstadoInmu;
-    @FXML
-    private JFXTextField txtCiudadInmu;
-    @FXML
-    private JFXTextField txtColoniaInmu;
-    @FXML
-    private JFXTextField txtDireccionInmu;
-    @FXML
-    private JFXTextField txtTipoInmu;
-    @FXML
-    private JFXTextField txtPrecioInmu;
-    @FXML
-    private JFXTextArea txtDescripcionInmu;
-    @FXML
-    private JFXTextField txtNombreVen;
-    @FXML
-    private JFXTextField txtCorreoVen;
-    @FXML
-    private JFXTextField txtTelefonoVen;
-    @FXML
-    private JFXTextField txtDepositoRen;
-    @FXML
-    private JFXDatePicker txtFechaInicioRen;
-    @FXML
-    private JFXDatePicker txtFechaFinRen;
-    @FXML
-    private JFXTextField txtTotalRen;
-    @FXML
-    private JFXButton btnRegistrarRenta;
-    @FXML
-    private JFXButton btnSalir;
+    @FXML private JFXButton btnBuscar;
+    @FXML private JFXTextField txtCodigoInmu;
+    @FXML private JFXTextField txtEstadoInmu;
+    @FXML private JFXTextField txtCiudadInmu;
+    @FXML private JFXTextField txtColoniaInmu;
+    @FXML private JFXTextField txtDireccionInmu;
+    @FXML private JFXTextField txtTipoInmu;
+    @FXML private JFXTextField txtPrecioInmu;
+    @FXML private JFXTextArea txtDescripcionInmu;
+    @FXML private JFXTextField txtNombreVen;
+    @FXML private JFXTextField txtCorreoVen;
+    @FXML private JFXTextField txtTelefonoVen;
+    @FXML private JFXTextField txtDepositoRen;
+    @FXML private JFXDatePicker txtFechaInicioRen;
+    @FXML private JFXDatePicker txtFechaFinRen;
+    @FXML private JFXTextField txtTotalRen;
+    @FXML private JFXButton btnRegistrarRenta;
+    @FXML private JFXButton btnSalir;
 
     /**
      * Initializes the controller class.
