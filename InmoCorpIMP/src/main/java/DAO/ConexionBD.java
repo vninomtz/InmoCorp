@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class ConexionBD {
     private Connection conexion;
     private final String host = "localhost";
-    private final String db = "agenda_contactos";
+    private final String db = "inmocorp";
     private final String username = "administrador";
     private final String password = "inmobiliaria";
     private final String url = "jdbc:mysql://" + host + "/" + db;

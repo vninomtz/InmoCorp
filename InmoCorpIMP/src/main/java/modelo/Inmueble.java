@@ -10,7 +10,7 @@ package modelo;
  * @author Vik-t
  */
 public class Inmueble {
-    private String idinmuble;
+    private int idinmuble;
     private String codigo;
     private String direccion;
     private boolean disponible;
@@ -20,9 +20,9 @@ public class Inmueble {
     private float preciorenta;
     private int idtipoinmueble;
     private int idciudad;
-    private int idciente;
+    private int idcliente;
 
-    public Inmueble(String codigo, String idinmuble, String direccion, boolean disponible, String notas, String colonia, float precioventa, float preciorenta, int idtipoinmueble, int idciudad, int idciente) {
+    public Inmueble(String codigo, int idinmuble, String direccion, boolean disponible, String notas, String colonia, float precioventa, float preciorenta, int idtipoinmueble, int idciudad, int idciente) {
         this.codigo = codigo;
         this.idinmuble = idinmuble;
         this.direccion = direccion;
@@ -33,14 +33,18 @@ public class Inmueble {
         this.preciorenta = preciorenta;
         this.idtipoinmueble = idtipoinmueble;
         this.idciudad = idciudad;
-        this.idciente = idciente;
+        this.idcliente = idciente;
     }
 
-    public String getIdinmuble() {
+    public Inmueble() {
+        
+    }
+
+    public int getIdinmuble() {
         return idinmuble;
     }
 
-    public void setIdinmuble(String idinmuble) {
+    public void setIdinmuble(int idinmuble) {
         this.idinmuble = idinmuble;
     }
 
@@ -117,12 +121,12 @@ public class Inmueble {
         this.idciudad = idciudad;
     }
 
-    public int getIdciente() {
-        return idciente;
+    public int getIdcliente() {
+        return idcliente;
     }
 
-    public void setIdciente(int idciente) {
-        this.idciente = idciente;
+    public void setIdcliente(int idciente) {
+        this.idcliente = idciente;
     }
     
     
