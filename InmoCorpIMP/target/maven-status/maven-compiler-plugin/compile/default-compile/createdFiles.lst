@@ -5,7 +5,12 @@ DAO\IRegistrarRenta.class
 modelo\Inmueble.class
 modelo\Renta.class
 controlador\RegistrarRentaController.class
+DAO\ClienteImp.class
+DAO\TipoInmuebleImp.class
 modelo\TipoInmueble.class
 DAO\IInmuebleDao.class
 controlador\InicioSesionController.class
+DAO\ITipoInmuebleDao.class
+modelo\Cliente.class
+DAO\IClienteDao.class
 DAO\RentaImp.class

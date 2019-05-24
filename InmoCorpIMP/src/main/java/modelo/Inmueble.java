@@ -20,7 +20,7 @@ public class Inmueble {
     private float preciorenta;
     private int idtipoinmueble;
     private int idciudad;
-    private int idciente;
+    private int idcliente;
 
     public Inmueble(String codigo, int idinmuble, String direccion, boolean disponible, String notas, String colonia, float precioventa, float preciorenta, int idtipoinmueble, int idciudad, int idciente) {
         this.codigo = codigo;
@@ -33,7 +33,7 @@ public class Inmueble {
         this.preciorenta = preciorenta;
         this.idtipoinmueble = idtipoinmueble;
         this.idciudad = idciudad;
-        this.idciente = idciente;
+        this.idcliente = idciente;
     }
 
     public Inmueble() {
@@ -121,12 +121,12 @@ public class Inmueble {
         this.idciudad = idciudad;
     }
 
-    public int getIdciente() {
-        return idciente;
+    public int getIdcliente() {
+        return idcliente;
     }
 
-    public void setIdciente(int idciente) {
-        this.idciente = idciente;
+    public void setIdcliente(int idciente) {
+        this.idcliente = idciente;
     }
     
     

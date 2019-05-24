@@ -5,8 +5,10 @@
  */
 package controlador;
 
+import DAO.ClienteImp;
 import DAO.InmuebleImp;
 import DAO.RentaImp;
+import DAO.TipoInmuebleImp;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -16,8 +18,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import static javafx.application.Platform.exit;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import modelo.Cliente;
 import modelo.Inmueble;
 import modelo.Renta;
 import modelo.TipoInmueble;
@@ -32,7 +37,7 @@ public class RegistrarRentaController implements Initializable {
     @FXML private JFXTextField txtBuscar;
     @FXML private JFXButton btnBuscar;
     @FXML private JFXTextField txtCodigoInmu;
-   @FXML  private JFXComboBox<String> cbTipoinmu;
+   @FXML  private JFXComboBox<TipoInmueble> cbTipoinmu;
     @FXML private JFXTextField txtCiudadInmu;
     @FXML private JFXTextField txtColoniaInmu;
     @FXML private JFXTextField txtDireccionInmu;
@@ -54,17 +59,25 @@ public class RegistrarRentaController implements Initializable {
      */
     @FXML
     private void botonBuscarInmueble(){
+        ClienteImp clienteimp = new ClienteImp();
         String codigoInmueble = txtBuscar.getText();
         Inmueble inmu = buscarInmueble(codigoInmueble);
         if(inmu != null) {
-            txtCodigoInmu.setText(inmu.getCodigo());
-            txtDireccionInmu.setText(inmu.getDireccion());
-            txtColoniaInmu.setText(inmu.getColonia());
-            txtCiudadInmu.setText(Integer.toString(inmu.getIdciudad()));
-           // cbTipoinmu.setSelectionModel(Integer.toString(inmu.getIdtipoinmueble()));
+           txtCodigoInmu.setText(inmu.getCodigo());
+           txtDireccionInmu.setText(inmu.getDireccion());
+           txtColoniaInmu.setText(inmu.getColonia());
+           txtCiudadInmu.setText(Integer.toString(inmu.getIdciudad()));
+           cbTipoinmu.getSelectionModel().select(inmu.getIdtipoinmueble()-1 );
            txtPrecioInmu.setText(Double.toString(inmu.getPreciorenta()));
            txtDescripcionInmu.setText(inmu.getNotas());
-            
+        }
+        
+        Cliente cliente = clienteimp.getCliente(inmu.getIdcliente());
+        System.out.println("ObjetoCliente id: " + cliente.getNombre());
+        if(cliente != null){
+            txtNombreVen.setText(cliente.toString());
+            txtCorreoVen.setText(cliente.getCorreo());
+            txtTelefonoVen.setText(cliente.getTelefono());
         }
     }
     private void iniciarInterfaz() {
@@ -75,6 +88,12 @@ public class RegistrarRentaController implements Initializable {
         cbTipoinmu.setEditable(false);
         txtPrecioInmu.setEditable(false);
         txtDescripcionInmu.setEditable(false);
+    }
+    private void llenarCbTipoInmueble() {
+        TipoInmuebleImp tipoinmuebleimp = new TipoInmuebleImp();
+        ObservableList<TipoInmueble> observablelisttipo = FXCollections.observableArrayList(tipoinmuebleimp.getTipoInmuebles());
+        cbTipoinmu.setItems(observablelisttipo);
+        
     }
     
     public Inmueble buscarInmueble(String codigo) {
@@ -98,6 +117,7 @@ public class RegistrarRentaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         iniciarInterfaz();
+        llenarCbTipoInmueble();
         // TODO
     }    
     

@@ -21,7 +21,7 @@ public class InmuebleImp implements IInmuebleDao{
 
     @Override
     public List<Inmueble> getInmuebles() {
-         List<Inmueble> listaInmuebles = new ArrayList();
+        List<Inmueble> listaInmuebles = new ArrayList();
         Connection conexionBD = new ConexionBD().getConexionBD();
         String sQuery = "SELECT * from inmueble";
         try {
@@ -39,7 +39,7 @@ public class InmuebleImp implements IInmuebleDao{
                 inmu.setPrecioventa(rs.getFloat("precio_venta"));
                 inmu.setIdtipoinmueble(rs.getInt("idtipo_inmueble"));
                 inmu.setIdciudad(rs.getInt("idciudad"));
-                inmu.setIdciente(rs.getInt("idcliente"));
+                inmu.setIdcliente(rs.getInt("idcliente"));
                 listaInmuebles.add(inmu);
             }
         } catch (SQLException ex) {
