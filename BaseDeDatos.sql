@@ -116,6 +116,7 @@ CREATE TABLE `cliente` (
   `rfc` varchar(15) NOT NULL,
   `tipo` varchar(45) DEFAULT NULL,
   `idacceso` int(11) NOT NULL,
+  `correo` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idcliente`),
   KEY `fk_cliente_acceso1` (`idacceso`),
   CONSTRAINT `fk_cliente_acceso1` FOREIGN KEY (`idacceso`) REFERENCES `acceso` (`idacceso`)
@@ -128,7 +129,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Alan','Gonzalez','Heredia','2282265548','Del museo','Centro','91010','CUPU800825569','Vendedor',1),(2,'Kevin Misael','Juarez','Hernandez','2283789456',NULL,NULL,NULL,'MIJH900523378','Comprador',2);
+INSERT INTO `cliente` VALUES (1,'Alan','Gonzalez','Heredia','2282265548','Del museo','Centro','91010','CUPU800825569','Vendedor',1,'alanglez@gmail.com'),(2,'Kevin Misael','Juarez','Hernandez','2283789456',NULL,NULL,NULL,'MIJH900523378','Comprador',2,'kevinmis@hotmail.com');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,8 +263,8 @@ DROP TABLE IF EXISTS `renta`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `renta` (
   `idrenta` int(11) NOT NULL AUTO_INCREMENT,
-  `fecha_inicio` date NOT NULL,
-  `fecha_fin` date NOT NULL,
+  `fecha_inicio` varchar(10) NOT NULL,
+  `fecha_fin` varchar(10) NOT NULL,
   `deposito` double DEFAULT NULL,
   `monto` double NOT NULL,
   `idcliente` int(11) NOT NULL,
@@ -273,7 +274,7 @@ CREATE TABLE `renta` (
   KEY `fk_renta_inmueble1` (`idinmueble`),
   CONSTRAINT `fk_renta_cliente1` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`),
   CONSTRAINT `fk_renta_inmueble1` FOREIGN KEY (`idinmueble`) REFERENCES `inmueble` (`idinmueble`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -282,6 +283,7 @@ CREATE TABLE `renta` (
 
 LOCK TABLES `renta` WRITE;
 /*!40000 ALTER TABLE `renta` DISABLE KEYS */;
+INSERT INTO `renta` VALUES (3,'23/05/2019','23/05/2020',1000,5800,1,2);
 /*!40000 ALTER TABLE `renta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -348,4 +350,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-24  0:01:49
+-- Dump completed on 2019-05-24 10:20:01
