@@ -10,7 +10,7 @@ package modelo;
  * @author Vik-t
  */
 public class Inmueble {
-    private String idinmuble;
+    private int idinmuble;
     private String codigo;
     private String direccion;
     private boolean disponible;
@@ -22,7 +22,7 @@ public class Inmueble {
     private int idciudad;
     private int idciente;
 
-    public Inmueble(String codigo, String idinmuble, String direccion, boolean disponible, String notas, String colonia, float precioventa, float preciorenta, int idtipoinmueble, int idciudad, int idciente) {
+    public Inmueble(String codigo, int idinmuble, String direccion, boolean disponible, String notas, String colonia, float precioventa, float preciorenta, int idtipoinmueble, int idciudad, int idciente) {
         this.codigo = codigo;
         this.idinmuble = idinmuble;
         this.direccion = direccion;
@@ -36,11 +36,15 @@ public class Inmueble {
         this.idciente = idciente;
     }
 
-    public String getIdinmuble() {
+    public Inmueble() {
+        
+    }
+
+    public int getIdinmuble() {
         return idinmuble;
     }
 
-    public void setIdinmuble(String idinmuble) {
+    public void setIdinmuble(int idinmuble) {
         this.idinmuble = idinmuble;
     }
 

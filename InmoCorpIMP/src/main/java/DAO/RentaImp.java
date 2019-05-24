@@ -38,8 +38,7 @@ public class RentaImp implements IRegistrarRenta{
             try {
                 conexionBD.close();
             } catch (SQLException ex) {
-                ex.printStackTrace();
-                System.out.println("Error al cerrar la conexion");
+                System.out.println("Error al cerrar la conexion" + ex.getMessage());
             }
         }
         return false;

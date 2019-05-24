@@ -13,14 +13,18 @@ import java.util.Date;
  */
 public class Renta {
     private int idrenta;
-    private Date fechainicio;
-    private Date fechafin;
+    private String fechainicio;
+    private String fechafin;
     private double deposito;
     private double monto;
     private int idcliente;
     private int idinmueble;
+    
+    public Renta() {
+        
+    }
 
-    public Renta(int idrenta, Date fechainicio, Date fechafin, double deposito, double monto, int idcliente, int idinmueble) {
+    public Renta(int idrenta, String fechainicio, String fechafin, double deposito, double monto, int idcliente, int idinmueble) {
         this.idrenta = idrenta;
         this.fechainicio = fechainicio;
         this.fechafin = fechafin;
@@ -38,19 +42,19 @@ public class Renta {
         this.idrenta = idrenta;
     }
 
-    public Date getFechainicio() {
+    public String getFechainicio() {
         return fechainicio;
     }
 
-    public void setFechainicio(Date fechainicio) {
+    public void setFechainicio(String fechainicio) {
         this.fechainicio = fechainicio;
     }
 
-    public Date getFechafin() {
+    public String getFechafin() {
         return fechafin;
     }
 
-    public void setFechafin(Date fechafin) {
+    public void setFechafin(String fechafin) {
         this.fechafin = fechafin;
     }
 

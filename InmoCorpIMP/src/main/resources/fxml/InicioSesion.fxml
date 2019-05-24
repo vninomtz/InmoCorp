@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="386.0" prefWidth="639.0" style="-fx-background-color: #FFFFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="386.0" prefWidth="639.0" style="-fx-background-color: #FFFFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InicioSesionController">
    <children>
       <AnchorPane layoutX="306.0" layoutY="21.0" prefHeight="344.0" prefWidth="308.0" style="-fx-background-color: #5a6b87; -fx-background-radius: 10px;">
          <children>
