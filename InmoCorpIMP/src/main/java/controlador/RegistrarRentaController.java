@@ -17,6 +17,9 @@ import com.jfoenix.controls.JFXTextField;
 import inmocorp.inmobiliaria.MainApp;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -30,6 +33,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 import modelo.Cliente;
 import modelo.Inmueble;
 import modelo.Renta;
@@ -42,6 +46,9 @@ import modelo.TipoInmueble;
  */
 public class RegistrarRentaController implements Initializable {
 
+    private Inmueble inmu;
+    private Cliente comprador;
+    private final double IVA_RENTA = 0.16;
     @FXML private JFXTextField txtBuscar;
     @FXML private JFXButton btnBuscar;
     @FXML private JFXTextField txtCodigoInmu;
@@ -61,6 +68,10 @@ public class RegistrarRentaController implements Initializable {
     @FXML private JFXTextField txtTotalRen;
     @FXML private JFXButton btnRegistrarRenta;
     @FXML private JFXButton btnSalir;
+    @FXML private JFXTextField txtNombreCom;
+    @FXML private JFXTextField txtCorreoCom;
+    @FXML private JFXTextField txtTelefonoCom;
+    @FXML private JFXButton btnBuscarCom;
     
     @FXML
     private void ventanaVenta() {
@@ -114,10 +125,53 @@ public class RegistrarRentaController implements Initializable {
         }
     }
     @FXML
+    private void botonRegistrarRenta(){
+        if(validarCampos()) {
+            Renta renta = new Renta();
+            renta.setIdinmueble(inmu.getIdinmuble());
+            //renta.setIdcliente(comprador.getIdcliente());
+            LocalDate date = txtFechaInicioRen.getValue();
+            renta.setFechainicio(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            date =txtFechaFinRen.getValue();
+            renta.setFechafin(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            renta.setDeposito(Double.parseDouble(txtDepositoRen.getText()));
+            renta.setMonto(Double.parseDouble(txtTotalRen.getText()));
+            
+            System.out.println("idInmueble: " + renta.getIdinmueble());
+            //System.out.println("idCliente: " + renta.getIdcliente());
+            System.out.println("FechaInicio: " + renta.getFechainicio());
+            System.out.println("FechaFin: " + renta.getFechafin());
+            System.out.println("Deposito: " + renta.getDeposito());
+            System.out.println("Monto: " + renta.getMonto());
+            
+        }
+    }
+    public boolean validarCampos() {
+        if(txtCodigoInmu.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Buscar el inmueble antes de registrar la renta");
+            return false;
+        }
+        if(txtFechaInicioRen.getValue() == null) {
+            JOptionPane.showMessageDialog(null, "Ingresar la fecha de inicio de la renta");
+            return false;
+        }
+        if(txtFechaFinRen.getValue() == null) {
+            JOptionPane.showMessageDialog(null, "Ingresar la fecha de fin de la renta");
+            return false;
+        }
+         if(txtNombreCom.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Buscar al comprador antes de registrar la renta");
+            return false;
+        }
+        
+        return true;
+    }
+    
+    @FXML
     private void botonBuscarInmueble(){
         ClienteImp clienteimp = new ClienteImp();
         String codigoInmueble = txtBuscar.getText();
-        Inmueble inmu = buscarInmueble(codigoInmueble);
+        inmu = buscarInmueble(codigoInmueble);
         if(inmu != null) {
            txtCodigoInmu.setText(inmu.getCodigo());
            txtDireccionInmu.setText(inmu.getDireccion());
@@ -126,6 +180,8 @@ public class RegistrarRentaController implements Initializable {
            cbTipoinmu.getSelectionModel().select(inmu.getIdtipoinmueble()-1 );
            txtPrecioInmu.setText(Double.toString(inmu.getPreciorenta()));
            txtDescripcionInmu.setText(inmu.getNotas());
+           double monto = inmu.getPreciorenta() + (IVA_RENTA * inmu.getPreciorenta());
+           txtTotalRen.setText(Double.toString(monto));
         }
         
         Cliente cliente = clienteimp.getCliente(inmu.getIdcliente());
