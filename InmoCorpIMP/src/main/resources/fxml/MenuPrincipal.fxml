@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="570.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.MenuPrincipalController">
+   <children>
+      <MenuBar layoutX="24.0" layoutY="24.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Ver">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#ventanaPrincipal" text="Inmuebles" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Modificar">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Inmuebles" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Agregar">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#ventanaVenta" text="Ventas" />
+                  <MenuItem mnemonicParsing="false" onAction="#ventanaRenta" text="Rentas" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <JFXButton fx:id="btnSalir" layoutX="745.0" layoutY="528.0" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: #009688;" text="Salir" />
+   </children>
+</AnchorPane>

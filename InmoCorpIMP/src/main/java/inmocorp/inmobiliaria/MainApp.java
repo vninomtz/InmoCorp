@@ -1,23 +1,29 @@
 package inmocorp.inmobiliaria;
 
+import controlador.RegistrarRentaController;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
 public class MainApp extends Application {
 
+    private Stage stage;
+    private AnchorPane anchorpane;
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/RegistrarRenta.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/MenuPrincipal.fxml"));
         
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
-        
-        stage.setTitle("JavaFX and Maven");
+        stage.setTitle("InmoCorp");
         stage.setScene(scene);
         stage.show();
     }
