@@ -42,7 +42,7 @@ public class MenuPrincipalController implements Initializable {
             principal.close();
             
         } catch (IOException ex) {
-            System.out.println("Error al mostrar ventana Ventas: " + ex.getMessage());
+            System.out.println("Error al mostrar ventana Ventas: " + ex);
         }
     }
     @FXML
@@ -77,7 +77,7 @@ public class MenuPrincipalController implements Initializable {
             Stage principal = (Stage) btnSalir.getScene().getWindow();
             principal.close();
         } catch (IOException ex) {
-            System.out.println("Error al mostrar ventana Ventas: " + ex.getMessage());
+            System.out.println("Error al mostrar ventana Rentas: " + ex);
         }
     }
     /**

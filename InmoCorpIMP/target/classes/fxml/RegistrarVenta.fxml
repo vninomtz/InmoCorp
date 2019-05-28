@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -15,7 +16,7 @@
 <AnchorPane id="AnchorPane" prefHeight="570.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.RegistrarVentaController">
     <children>
         <JFXTextField fx:id="txtBuscarInm" layoutX="25.0" layoutY="37.0" promptText="Ej: IM001" />
-        <JFXButton fx:id="btnBuscarInmu" layoutX="177.0" layoutY="43.0" style="-fx-background-color: #009688;" text="Buscar" />
+        <JFXButton fx:id="btnBuscarInmu" layoutX="177.0" layoutY="43.0" onAction="#botonBuscarInmueble" style="-fx-background-color: #009688;" text="Buscar" />
         <AnchorPane layoutX="14.0" layoutY="81.0" prefHeight="230.0" prefWidth="487.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 10px;">
             <children>
                 <Label layoutX="14.0" layoutY="6.0" text="Datos del Inmueble">
@@ -26,9 +27,9 @@
                 <JFXTextField fx:id="txtCiudadInmu" labelFloat="true" layoutX="337.0" layoutY="43.0" promptText="Ciudad" />
                 <JFXTextField fx:id="txtColoniaInmu" labelFloat="true" layoutX="14.0" layoutY="94.0" promptText="Colonia" />
                 <JFXTextField fx:id="txtDireccionInmu" labelFloat="true" layoutX="175.0" layoutY="94.0" promptText="Dirección" />
-                <JFXTextField fx:id="txtTipoInmu" labelFloat="true" layoutX="337.0" layoutY="94.0" promptText="Tipo" />
                 <JFXTextField fx:id="txtPrecioInmu" labelFloat="true" layoutX="14.0" layoutY="185.0" promptText="Precio de Venta" />
                 <JFXTextArea fx:id="txtDescripcionInmu" labelFloat="true" layoutX="163.0" layoutY="140.0" prefHeight="70.0" prefWidth="315.0" promptText="Descripción" />
+            <JFXComboBox fx:id="cbTipoinmu" labelFloat="true" layoutX="325.0" layoutY="94.0" prefHeight="25.0" prefWidth="164.0" promptText="Tipo" />
             </children>
         </AnchorPane>
         <AnchorPane layoutX="518.0" layoutY="81.0" prefHeight="230.0" prefWidth="281.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 10px;">
@@ -50,7 +51,7 @@
                 <JFXTextField fx:id="txtTotalVen" labelFloat="true" layoutX="244.0" layoutY="50.0" prefHeight="25.0" prefWidth="135.0" promptText="Monto total (mxn)" />
             </children>
         </AnchorPane>
-        <JFXButton fx:id="btnRegistrarVenta" buttonType="RAISED" layoutX="535.0" layoutY="518.0" prefHeight="25.0" prefWidth="171.0" ripplerFill="#404040" style="-fx-background-color: #009688;" text="Registrar Venta">
+        <JFXButton fx:id="btnRegistrarVenta" buttonType="RAISED" layoutX="535.0" layoutY="518.0" onAction="#botonRegistrarVenta" prefHeight="25.0" prefWidth="171.0" ripplerFill="#404040" style="-fx-background-color: #009688;" text="Registrar Venta">
             
         </JFXButton>
         <JFXButton fx:id="btnSalir" layoutX="735.0" layoutY="518.0" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: #009688;" text="Salir" />
@@ -80,7 +81,7 @@
             <JFXTextField fx:id="txtNombreCom" labelFloat="true" layoutX="24.0" layoutY="34.0" prefHeight="25.0" prefWidth="227.0" promptText="Nombre" />
             <JFXTextField fx:id="txtCorreoCom" labelFloat="true" layoutX="24.0" layoutY="81.0" prefHeight="25.0" prefWidth="227.0" promptText="Correo" />
             <JFXTextField fx:id="txtTelefonoCom" labelFloat="true" layoutX="24.0" layoutY="126.0" promptText="Teléfono" />
-            <JFXButton fx:id="btnBuscarCom" layoutX="188.0" layoutY="137.0" onAction="#botonBuscarInmueble" prefHeight="17.0" prefWidth="82.0" style="-fx-background-color: #009688;" text="   Buscar" />
+            <JFXButton fx:id="btnBuscarCom" layoutX="188.0" layoutY="137.0" onAction="#ventanaComprador" prefHeight="17.0" prefWidth="82.0" style="-fx-background-color: #009688;" text="   Buscar" />
             <ImageView fitHeight="16.0" fitWidth="21.0" layoutX="196.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/search.png" />
