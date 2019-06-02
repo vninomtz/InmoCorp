@@ -46,6 +46,7 @@ public class SeleccionarClienteController implements Initializable {
     ObservableList<Cliente> clientest;
     
     RegistrarVentaController controllerVenta;
+    RegistrarRentaController controllerRenta;
     private Cliente comprador;
 
     public Cliente getComprador() {
@@ -60,12 +61,16 @@ public class SeleccionarClienteController implements Initializable {
     public void setController(RegistrarVentaController controller){
        this.controllerVenta = controller;
     }
+    public void setController(RegistrarRentaController controller){
+       this.controllerRenta = controller;
+    }
     
     @FXML
     private void botonSeleccionar(){
         comprador = obtenerClienteSeleccionado();
         System.out.println(comprador);
         if(comprador != null){
+            controllerRenta.setComprador(comprador);
             Stage principal = (Stage) btSeleccionar.getScene().getWindow();
             principal.close();
         }else {

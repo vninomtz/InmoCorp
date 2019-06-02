@@ -1,22 +1,22 @@
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/controlador/InicioSesionController.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/DAO/IVentaDao.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/modelo/Cliente.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/DAO/TipoInmuebleImp.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/controlador/RegistrarRentaController.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/DAO/IClienteDao.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/DAO/RentaImp.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/controlador/RegistrarVentaController.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/modelo/Renta.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/DAO/ITipoInmuebleDao.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/controlador/MenuPrincipalController.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/modelo/Venta.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/inmocorp/inmobiliaria/MainApp.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/DAO/VentaImp.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/controlador/SeleccionarClienteController.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/modelo/Inmueble.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/DAO/IRegistrarRenta.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/DAO/InmuebleImp.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/DAO/IInmuebleDao.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/DAO/ConexionBD.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/modelo/TipoInmueble.java
-/Users/alanglezh/Documents/ProcesoParaLaIngenieriaDeSoftware/InmoCorp/InmoCorpIMP/src/main/java/DAO/ClienteImp.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\controlador\RegistrarRentaController.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\controlador\MenuPrincipalController.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\DAO\IRegistrarRenta.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\DAO\IInmuebleDao.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\DAO\RentaImp.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\DAO\VentaImp.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\modelo\Venta.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\DAO\ConexionBD.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\controlador\SeleccionarClienteController.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\modelo\Inmueble.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\DAO\ITipoInmuebleDao.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\DAO\InmuebleImp.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\controlador\InicioSesionController.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\modelo\Cliente.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\DAO\IVentaDao.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\DAO\TipoInmuebleImp.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\inmocorp\inmobiliaria\MainApp.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\modelo\Renta.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\DAO\IClienteDao.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\DAO\ClienteImp.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\modelo\TipoInmueble.java
+C:\Users\Vik-t\Documents\CarreraUV\4to Semestre\Procesos Para IS\Proyecto\Implementacion\InmoCorp\InmoCorpIMP\src\main\java\controlador\RegistrarVentaController.java

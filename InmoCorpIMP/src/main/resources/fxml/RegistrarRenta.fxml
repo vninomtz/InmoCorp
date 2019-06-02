@@ -69,7 +69,7 @@
             <JFXTextField fx:id="txtNombreCom" labelFloat="true" layoutX="24.0" layoutY="34.0" prefHeight="25.0" prefWidth="227.0" promptText="Nombre" />
             <JFXTextField fx:id="txtCorreoCom" labelFloat="true" layoutX="24.0" layoutY="81.0" prefHeight="25.0" prefWidth="227.0" promptText="Correo" />
             <JFXTextField fx:id="txtTelefonoCom" labelFloat="true" layoutX="24.0" layoutY="126.0" promptText="Teléfono" />
-            <JFXButton fx:id="btnBuscarCom" layoutX="188.0" layoutY="137.0" onAction="#ventanaComprador" prefHeight="17.0" prefWidth="82.0" style="-fx-background-color: #009688;" text="   Buscar" />
+            <JFXButton fx:id="btnBuscarCom" layoutX="188.0" layoutY="137.0" onAction="#ventanaSeleccionarCliente" prefHeight="17.0" prefWidth="82.0" style="-fx-background-color: #009688;" text="   Buscar" />
             <ImageView fitHeight="16.0" fitWidth="21.0" layoutX="196.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/search.png" />

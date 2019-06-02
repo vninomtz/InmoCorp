@@ -35,6 +35,7 @@ public class InmuebleImp implements IInmuebleDao{
                 inmu.setDisponible(rs.getBoolean("disponible"));
                 inmu.setNotas(rs.getString("notas"));
                 inmu.setColonia(rs.getString("colonia"));
+                inmu.setTipoOperacion(rs.getString("tipo_operacion"));
                 inmu.setPreciorenta(rs.getFloat("precio_renta"));
                 inmu.setPrecioventa(rs.getFloat("precio_venta"));
                 inmu.setIdtipoinmueble(rs.getInt("idtipo_inmueble"));

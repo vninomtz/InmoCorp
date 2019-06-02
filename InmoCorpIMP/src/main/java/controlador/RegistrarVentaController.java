@@ -103,7 +103,7 @@ public class RegistrarVentaController implements Initializable {
     private void ventanaComprador() {
         try {
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/SeleccionarCliente.fxml"));
-           SeleccionarClienteController controller = (SeleccionarClienteController)loader.getController();
+            SeleccionarClienteController controller = (SeleccionarClienteController)loader.getController();
             //controller.setController(maincontroller);
             AnchorPane anchorpane = loader.load();
             Scene scene = new Scene(anchorpane);

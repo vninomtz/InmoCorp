@@ -5,17 +5,27 @@
  */
 package controlador;
 
+import DAO.TipoInmuebleImp;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import inmocorp.inmobiliaria.MainApp;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import modelo.Inmueble;
+import modelo.TipoInmueble;
 
 /**
  * FXML Controller class
@@ -26,6 +36,17 @@ public class MenuPrincipalController implements Initializable {
 
     
     @FXML private JFXButton btnSalir;
+    @FXML private JFXTextField txtBuscarInmu;
+    @FXML private JFXButton btnBuscarInmu;
+    @FXML private JFXComboBox<TipoInmueble> cbTipoInmu;
+    @FXML private JFXComboBox<String> cbTipoOperacion;
+    @FXML private TableColumn<Inmueble, String> colTipoOperacion;
+    @FXML private TableColumn<Inmueble, String> colTipoInmu;
+    @FXML private TableColumn<Inmueble, String> colDescripcion;
+    @FXML private TableColumn<Inmueble, String> colCiudad;
+    @FXML private TableColumn<Inmueble, String> colEstado;
+    @FXML private TableColumn<Inmueble,Double> colPrecioRenta;
+    @FXML private TableColumn<Inmueble,Double> colPrecioVenta;
 
     @FXML
     private void ventanaVenta() {
@@ -80,12 +101,31 @@ public class MenuPrincipalController implements Initializable {
             System.out.println("Error al mostrar ventana Rentas: " + ex);
         }
     }
-    /**
-     * Initializes the controller class.
-     */
+    
+    private void cargarCbTipoInmueble() {
+        TipoInmuebleImp tipoinmuebleimp = new TipoInmuebleImp();
+        ObservableList<TipoInmueble> observablelisttipo = 
+                FXCollections.observableArrayList(tipoinmuebleimp.getTipoInmuebles());
+        cbTipoInmu.setItems(observablelisttipo);    
+    }
+    
+    private void cargarCbTipoOperacion() {
+        List<String> listaTipoOperacion = new ArrayList(); 
+        listaTipoOperacion.add("Renta");
+        listaTipoOperacion.add("Venta");
+        listaTipoOperacion.add("Venta/Renta");
+        ObservableList<String> obsevableListaTipoOpe = 
+                FXCollections.observableArrayList(listaTipoOperacion);
+        cbTipoOperacion.setItems(obsevableListaTipoOpe);
+    }
+    private void iniciarInterfaz() {
+        cargarCbTipoInmueble();
+        cargarCbTipoOperacion();
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        iniciarInterfaz();
     }
     
 }

@@ -27,12 +27,14 @@ import java.util.logging.Logger;
 import static javafx.application.Platform.exit;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
 import modelo.Inmueble;
@@ -167,13 +169,40 @@ public class RegistrarRentaController implements Initializable {
             System.out.println("Error al mostrar ventana Ventas: " + ex.getMessage());
         }
     }
-    
+    @FXML
+    private void ventanaSeleccionarCliente() {
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/SeleccionarCliente.fxml"));
+            AnchorPane anchorpane = loader.load();
+            Scene scene = new Scene(anchorpane);
+            scene.getStylesheets().add("/styles/Styles.css");
+            Stage stage = new Stage();
+            stage.setTitle("Registrar Rentas");
+            stage.setScene(scene);
+            SeleccionarClienteController controller = (SeleccionarClienteController)loader.getController();
+            controller.setController(this);
+            stage.setOnHidden(new EventHandler<WindowEvent>(){
+                @Override
+                public void handle(WindowEvent event){
+                     txtNombreCom.setText(comprador.toString());
+                }
+            });
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println("Error al mostrar ventana Ventas: " + ex.getMessage());
+        }
+        
+       
+    }
+    public void setComprador(Cliente comprador) {
+        this.comprador = comprador;
+    }
     @FXML
     private void botonRegistrarRenta() {
         if (validarCampos()) {
             Renta renta = new Renta();
             renta.setIdinmueble(inmu.getIdinmuble());
-            //renta.setIdcliente(comprador.getIdcliente());
+            renta.setIdcliente(comprador.getIdcliente());
             LocalDate date = txtFechaInicioRen.getValue();
             renta.setFechainicio(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             date = txtFechaFinRen.getValue();
@@ -181,12 +210,10 @@ public class RegistrarRentaController implements Initializable {
             renta.setDeposito(Double.parseDouble(txtDepositoRen.getText()));
             renta.setMonto(Double.parseDouble(txtTotalRen.getText()));
 
-            System.out.println("idInmueble: " + renta.getIdinmueble());
-            //System.out.println("idCliente: " + renta.getIdcliente());
-            System.out.println("FechaInicio: " + renta.getFechainicio());
-            System.out.println("FechaFin: " + renta.getFechafin());
-            System.out.println("Deposito: " + renta.getDeposito());
-            System.out.println("Monto: " + renta.getMonto());
+            RentaImp rentaimp = new RentaImp();
+            if(rentaimp.guardarRenta(renta)) {
+                JOptionPane.showMessageDialog(null, "Renta Guardada Exitosamente");
+            }
 
         }
     }
@@ -253,7 +280,8 @@ public class RegistrarRentaController implements Initializable {
 
     private void llenarCbTipoInmueble() {
         TipoInmuebleImp tipoinmuebleimp = new TipoInmuebleImp();
-        ObservableList<TipoInmueble> observablelisttipo = FXCollections.observableArrayList(tipoinmuebleimp.getTipoInmuebles());
+        ObservableList<TipoInmueble> observablelisttipo = 
+                FXCollections.observableArrayList(tipoinmuebleimp.getTipoInmuebles());
         cbTipoinmu.setItems(observablelisttipo);
 
     }
@@ -280,7 +308,7 @@ public class RegistrarRentaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         iniciarInterfaz();
         llenarCbTipoInmueble();
-        // TODO
+        
     }
 
 }

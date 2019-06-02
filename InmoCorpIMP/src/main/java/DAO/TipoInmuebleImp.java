@@ -35,12 +35,14 @@ public class TipoInmuebleImp implements ITipoInmuebleDao{
             }
         } catch (SQLException ex) {
             System.out.println("Error en la creacion de el Statement: " + ex.getMessage());
+            return null;
         } finally {
             try {
-                conexionBD.close();
+                conexionBD.close();                
             } catch (SQLException ex) {
-                System.out.println("Error al cerrar la conexion:" + ex.getMessage());
+                System.out.println("Error al cerrar la conexion:");
             }
+           
         }
         return listaTipoInmuebles;
     }

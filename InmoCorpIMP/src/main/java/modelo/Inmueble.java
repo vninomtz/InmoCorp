@@ -16,19 +16,23 @@ public class Inmueble {
     private boolean disponible;
     private String notas;
     private String colonia;
+    private String tipoOperacion;
     private float precioventa;
     private float preciorenta;
     private int idtipoinmueble;
     private int idciudad;
     private int idcliente;
 
-    public Inmueble(String codigo, int idinmuble, String direccion, boolean disponible, String notas, String colonia, float precioventa, float preciorenta, int idtipoinmueble, int idciudad, int idciente) {
+    public Inmueble(String codigo, int idinmuble, String direccion, 
+            boolean disponible, String notas, String colonia, String tipoOperacion,
+            float precioventa, float preciorenta, int idtipoinmueble, int idciudad, int idciente) {
         this.codigo = codigo;
         this.idinmuble = idinmuble;
         this.direccion = direccion;
         this.disponible = disponible;
         this.notas = notas;
         this.colonia = colonia;
+        this.tipoOperacion = tipoOperacion;
         this.precioventa = precioventa;
         this.preciorenta = preciorenta;
         this.idtipoinmueble = idtipoinmueble;
@@ -92,6 +96,15 @@ public class Inmueble {
     public float getPrecioventa() {
         return precioventa;
     }
+
+    public String getTipoOperacion() {
+        return tipoOperacion;
+    }
+
+    public void setTipoOperacion(String tipoOperacion) {
+        this.tipoOperacion = tipoOperacion;
+    }
+    
 
     public void setPrecioventa(float precioventa) {
         this.precioventa = precioventa;
