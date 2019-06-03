@@ -50,13 +50,13 @@
             <JFXComboBox fx:id="cbTipoOperacion" labelFloat="true" layoutX="189.0" layoutY="38.0" prefHeight="25.0" prefWidth="119.0" promptText="Tipo Operación" />
          </children>
       </AnchorPane>
-      <TableView layoutX="10.0" layoutY="177.0" prefHeight="245.0" prefWidth="799.0">
+      <TableView fx:id="tablaInmueble" layoutX="10.0" layoutY="177.0" prefHeight="245.0" prefWidth="799.0">
         <columns>
           <TableColumn fx:id="colTipoOperacion" editable="false" prefWidth="105.0" resizable="false" text="Venta/Renta" />
             <TableColumn fx:id="colTipoInmu" editable="false" prefWidth="128.0" resizable="false" text="Tipo de Inmueble" />
             <TableColumn fx:id="colDescripcion" editable="false" prefWidth="225.0" resizable="false" text="Descripción" />
             <TableColumn fx:id="colCiudad" editable="false" prefWidth="76.0" resizable="false" text="Ciudad" />
-            <TableColumn fx:id="colEstado" editable="false" prefWidth="83.0" resizable="false" text="Estado" />
+            <TableColumn fx:id="colColonia" editable="false" prefWidth="83.0" resizable="false" text="Colonia" />
             <TableColumn fx:id="colPrecioRenta" editable="false" prefWidth="89.0" resizable="false" text="Precio Renta" />
             <TableColumn fx:id="colPrecioVenta" editable="false" prefWidth="92.0" resizable="false" text="Precio Venta" />
         </columns>

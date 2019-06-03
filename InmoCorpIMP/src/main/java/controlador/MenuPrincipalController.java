@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import DAO.InmuebleImp;
 import DAO.TipoInmuebleImp;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -15,6 +16,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,8 +25,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import modelo.Inmueble;
 import modelo.TipoInmueble;
 
@@ -34,7 +40,7 @@ import modelo.TipoInmueble;
  */
 public class MenuPrincipalController implements Initializable {
 
-    
+    List<Inmueble> listaInmueble = new ArrayList();
     @FXML private JFXButton btnSalir;
     @FXML private JFXTextField txtBuscarInmu;
     @FXML private JFXButton btnBuscarInmu;
@@ -43,10 +49,11 @@ public class MenuPrincipalController implements Initializable {
     @FXML private TableColumn<Inmueble, String> colTipoOperacion;
     @FXML private TableColumn<Inmueble, String> colTipoInmu;
     @FXML private TableColumn<Inmueble, String> colDescripcion;
-    @FXML private TableColumn<Inmueble, String> colCiudad;
-    @FXML private TableColumn<Inmueble, String> colEstado;
+    @FXML private TableColumn<Inmueble, Integer> colCiudad;
+    @FXML private TableColumn<Inmueble, String> colColonia;
     @FXML private TableColumn<Inmueble,Double> colPrecioRenta;
     @FXML private TableColumn<Inmueble,Double> colPrecioVenta;
+    @FXML private TableView<Inmueble> tablaInmueble;
 
     @FXML
     private void ventanaVenta() {
@@ -102,14 +109,14 @@ public class MenuPrincipalController implements Initializable {
         }
     }
     
-    private void cargarCbTipoInmueble() {
+    private void llenarCbTipoInmueble() {
         TipoInmuebleImp tipoinmuebleimp = new TipoInmuebleImp();
         ObservableList<TipoInmueble> observablelisttipo = 
                 FXCollections.observableArrayList(tipoinmuebleimp.getTipoInmuebles());
         cbTipoInmu.setItems(observablelisttipo);    
     }
     
-    private void cargarCbTipoOperacion() {
+    private void llenarCbTipoOperacion() {
         List<String> listaTipoOperacion = new ArrayList(); 
         listaTipoOperacion.add("Renta");
         listaTipoOperacion.add("Venta");
@@ -118,9 +125,29 @@ public class MenuPrincipalController implements Initializable {
                 FXCollections.observableArrayList(listaTipoOperacion);
         cbTipoOperacion.setItems(obsevableListaTipoOpe);
     }
+    
+    private void llenarTablaInmuebles() {
+        TipoInmuebleImp tipoinmuebleimp = new TipoInmuebleImp();
+        List<TipoInmueble> listaTipoCd = tipoinmuebleimp.getTipoInmuebles();
+        colTipoOperacion.setCellValueFactory(new PropertyValueFactory("tipoOperacion"));
+        colTipoInmu.setCellValueFactory(new PropertyValueFactory("idtipoinmueble"));
+        colDescripcion.setCellValueFactory(new PropertyValueFactory("notas"));
+        colCiudad.setCellValueFactory(new PropertyValueFactory("idciudad"));
+        colColonia.setCellValueFactory(new PropertyValueFactory("colonia"));
+        colPrecioRenta.setCellValueFactory(new PropertyValueFactory("preciorenta"));
+        colPrecioVenta.setCellValueFactory(new PropertyValueFactory("precioventa"));
+        InmuebleImp controller = new InmuebleImp();
+        listaInmueble = controller.getInmuebles();
+        ObservableList<Inmueble> observableListInmu = FXCollections.observableArrayList(listaInmueble);
+        tablaInmueble.setItems(observableListInmu);
+        
+       
+        
+    }
     private void iniciarInterfaz() {
-        cargarCbTipoInmueble();
-        cargarCbTipoOperacion();
+        llenarCbTipoInmueble();
+        llenarCbTipoOperacion();
+        llenarTablaInmuebles();
     }
     
     @Override
