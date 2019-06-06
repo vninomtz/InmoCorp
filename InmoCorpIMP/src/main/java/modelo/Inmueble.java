@@ -19,15 +19,21 @@ public class Inmueble {
     private String tipoOperacion;
     private float precioventa;
     private float preciorenta;
+    private Cliente cliente = new Cliente();
+    private String tipoInmuble;
+    private String ciudad;
+    
+    //Se van a eliminar estos atributos
     private int idtipoinmueble;
     private int idciudad;
     private int idcliente;
 
-    public Inmueble(String codigo, int idinmuble, String direccion, 
-            boolean disponible, String notas, String colonia, String tipoOperacion,
-            float precioventa, float preciorenta, int idtipoinmueble, int idciudad, int idciente) {
-        this.codigo = codigo;
+    public Inmueble(int idinmuble, String codigo, String direccion, 
+            boolean disponible, String notas, String colonia, String tipoOperacion, 
+            float precioventa, float preciorenta, Cliente cliente, String tipoInmuble, 
+            String ciudad, int idtipoinmueble, int idciudad, int idcliente) {
         this.idinmuble = idinmuble;
+        this.codigo = codigo;
         this.direccion = direccion;
         this.disponible = disponible;
         this.notas = notas;
@@ -35,10 +41,15 @@ public class Inmueble {
         this.tipoOperacion = tipoOperacion;
         this.precioventa = precioventa;
         this.preciorenta = preciorenta;
+        this.cliente = cliente;
+        this.tipoInmuble = tipoInmuble;
+        this.ciudad = ciudad;
         this.idtipoinmueble = idtipoinmueble;
         this.idciudad = idciudad;
-        this.idcliente = idciente;
+        this.idcliente = idcliente;
     }
+
+    
 
     public Inmueble() {
         
@@ -117,6 +128,38 @@ public class Inmueble {
     public void setPreciorenta(float preciorenta) {
         this.preciorenta = preciorenta;
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public String getTipoInmuble() {
+        return tipoInmuble;
+    }
+
+    public void setTipoInmuble(String tipoInmuble) {
+        this.tipoInmuble = tipoInmuble;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+    
+    
+    
+    //Hacia bajo se van a eliminar 
+    
+    
+    
+    
 
     public int getIdtipoinmueble() {
         return idtipoinmueble;

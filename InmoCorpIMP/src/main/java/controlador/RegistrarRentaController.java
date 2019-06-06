@@ -57,8 +57,7 @@ public class RegistrarRentaController implements Initializable {
     private JFXButton btnBuscar;
     @FXML
     private JFXTextField txtCodigoInmu;
-    @FXML
-    private JFXComboBox<TipoInmueble> cbTipoinmu;
+    
     @FXML
     private JFXTextField txtCiudadInmu;
     @FXML
@@ -185,6 +184,8 @@ public class RegistrarRentaController implements Initializable {
                 @Override
                 public void handle(WindowEvent event){
                      txtNombreCom.setText(comprador.toString());
+                     txtCorreoCom.setText(comprador.getCorreo());
+                     txtTelefonoCom.setText(comprador.getTelefono());
                 }
             });
             stage.show();
@@ -243,7 +244,6 @@ public class RegistrarRentaController implements Initializable {
 
     @FXML
     private void botonBuscarInmueble() {
-        ClienteImp clienteimp = new ClienteImp();
         String codigoInmueble = txtBuscar.getText();
         inmu = buscarInmueble(codigoInmueble);
         
@@ -251,20 +251,15 @@ public class RegistrarRentaController implements Initializable {
             txtCodigoInmu.setText(inmu.getCodigo());
             txtDireccionInmu.setText(inmu.getDireccion());
             txtColoniaInmu.setText(inmu.getColonia());
-            txtCiudadInmu.setText(Integer.toString(inmu.getIdciudad()));
-            cbTipoinmu.getSelectionModel().select(inmu.getIdtipoinmueble() - 1);
+            txtCiudadInmu.setText(inmu.getCiudad());
+            txtTipoInmu.setText(inmu.getTipoInmuble());
             txtPrecioInmu.setText(Double.toString(inmu.getPreciorenta()));
             txtDescripcionInmu.setText(inmu.getNotas());
             double monto = inmu.getPreciorenta() + (IVA_RENTA * inmu.getPreciorenta());
             txtTotalRen.setText(Double.toString(monto));
-        }
-
-        Cliente cliente = clienteimp.getCliente(inmu.getIdcliente());
-        System.out.println("ObjetoCliente id: " + cliente.getNombre());
-        if (cliente != null) {
-            txtNombreVen.setText(cliente.toString());
-            txtCorreoVen.setText(cliente.getCorreo());
-            txtTelefonoVen.setText(cliente.getTelefono());
+            txtNombreVen.setText(inmu.getCliente().toString());
+            txtCorreoVen.setText(inmu.getCliente().getCorreo());
+            txtTelefonoVen.setText(inmu.getCliente().getTelefono());
         }
     }
 
@@ -273,17 +268,18 @@ public class RegistrarRentaController implements Initializable {
         txtDireccionInmu.setEditable(false);
         txtColoniaInmu.setEditable(false);
         txtCiudadInmu.setEditable(false);
-        cbTipoinmu.setEditable(false);
+        txtTipoInmu.setEditable(false);
         txtPrecioInmu.setEditable(false);
         txtDescripcionInmu.setEditable(false);
-    }
-
-    private void llenarCbTipoInmueble() {
-        TipoInmuebleImp tipoinmuebleimp = new TipoInmuebleImp();
-        ObservableList<TipoInmueble> observablelisttipo = 
-                FXCollections.observableArrayList(tipoinmuebleimp.getTipoInmuebles());
-        cbTipoinmu.setItems(observablelisttipo);
-
+        txtTotalRen.setEditable(false);
+        
+        txtNombreVen.setEditable(false);
+        txtCorreoVen.setEditable(false);
+        txtTelefonoVen.setEditable(false);
+        
+        txtNombreCom.setEditable(false);
+        txtCorreoCom.setEditable(false);
+        txtTelefonoCom.setEditable(false);
     }
 
     public Inmueble buscarInmueble(String codigo) {
@@ -307,7 +303,6 @@ public class RegistrarRentaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         iniciarInterfaz();
-        llenarCbTipoInmueble();
         
     }
 

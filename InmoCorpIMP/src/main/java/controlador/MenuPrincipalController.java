@@ -140,9 +140,6 @@ public class MenuPrincipalController implements Initializable {
         listaInmueble = controller.getInmuebles();
         ObservableList<Inmueble> observableListInmu = FXCollections.observableArrayList(listaInmueble);
         tablaInmueble.setItems(observableListInmu);
-        
-       
-        
     }
     private void iniciarInterfaz() {
         llenarCbTipoInmueble();
@@ -152,7 +149,7 @@ public class MenuPrincipalController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        iniciarInterfaz();
+        //iniciarInterfaz();
     }
     
 }
