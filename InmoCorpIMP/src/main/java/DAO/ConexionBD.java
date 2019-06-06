@@ -8,6 +8,7 @@ package DAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -28,6 +29,11 @@ public class ConexionBD {
                 conexion = DriverManager.getConnection(url, username, password);
             } catch (SQLException ex) {
                 System.out.println("Error al obtener conexióna a BD: " + ex.getMessage());
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error con BD");
+                alert.setHeaderText("Hubo un error con la conexión a la Base de Datos,"
+                        + "por favor intente más tarde");
+                alert.showAndWait();
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             System.out.println("Error en la instancia del controlador: " + ex.getMessage());

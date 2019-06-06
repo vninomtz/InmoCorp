@@ -32,6 +32,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -211,10 +212,24 @@ public class RegistrarRentaController implements Initializable {
             renta.setDeposito(Double.parseDouble(txtDepositoRen.getText()));
             renta.setMonto(Double.parseDouble(txtTotalRen.getText()));
 
+            InmuebleImp inmuebleimp = new InmuebleImp();
             RentaImp rentaimp = new RentaImp();
             if(rentaimp.guardarRenta(renta)) {
-                JOptionPane.showMessageDialog(null, "Renta Guardada Exitosamente");
+                if(inmuebleimp.updateDisponibilidad(inmu.getIdinmuble(), false)) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Renta Guardada");
+                    alert.setHeaderText("La renta se a guardado Exitosamente");
+                    alert.showAndWait();
+                    ventanaPrincipal();
+                }
+            }else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error en BD");
+                alert.setHeaderText("Hubo un error en la conexión a la Base de Datos"
+                        + "Por favor intente más tarde");
+                alert.showAndWait();
             }
+            
 
         }
     }
@@ -223,22 +238,121 @@ public class RegistrarRentaController implements Initializable {
 
     public boolean validarCampos() {
         if (txtCodigoInmu.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Buscar el inmueble antes de registrar la renta");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con la informacion");
+            alert.setHeaderText("Buscar el inmueble antes de registrar la renta");
+            alert.showAndWait();
             return false;
         }
+        
+        //Inicio fecha inicio renta
         if (txtFechaInicioRen.getValue() == null) {
-            JOptionPane.showMessageDialog(null, "Ingresar la fecha de inicio de la renta");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con la informacion");
+            alert.setHeaderText("Ingresar la fecha del inicio de la renta");
+            alert.showAndWait();
             return false;
-        }
-        if (txtFechaFinRen.getValue() == null) {
-            JOptionPane.showMessageDialog(null, "Ingresar la fecha de fin de la renta");
-            return false;
-        }
-        if (txtNombreCom.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Buscar al comprador antes de registrar la renta");
-            return false;
-        }
 
+        } else {
+            LocalDate fechaInicioRen = txtFechaInicioRen.getValue();
+            LocalDate fechaActual = LocalDate.now();
+
+            if (fechaInicioRen.compareTo(fechaActual) < 0) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error con la informacion");
+                alert.setHeaderText("Ingrese una fecha valida");
+                alert.setContentText("La fecha ingresada es menor a la actual,"
+                        + " por favor seleccione una correcta");
+                alert.showAndWait();
+                return false;
+            }
+        }
+        //inicio fecha fin renta
+        if (txtFechaFinRen.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con la informacion");
+            alert.setHeaderText("Ingresar la fecha del fin de la renta");
+            alert.showAndWait();
+            return false;
+        } else {
+            LocalDate fechaInicioRen = txtFechaInicioRen.getValue();
+            LocalDate fechaFinRen = txtFechaFinRen.getValue();
+
+            if (fechaFinRen.compareTo(fechaInicioRen) < 0) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error con la informacion");
+                alert.setHeaderText("Ingrese una fecha valida");
+                alert.setContentText("La fecha de fin es menor a la fecha de inicio ,"
+                        + " por favor seleccione una correcta");
+                alert.showAndWait();
+                return false;
+            }
+        }
+        
+        if (txtNombreCom.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con la informacion");
+            alert.setHeaderText("Buscar el comprador antes de registrar la venta");
+            alert.showAndWait();
+            return false;
+        }
+        if (txtDepositoRen.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con la informacion");
+            alert.setHeaderText("Ingresar el deposito de la renta");
+            alert.showAndWait();
+            return false;
+        } else {
+            try {
+                 Double deposito = Double.parseDouble(txtDepositoRen.getText());
+            } catch(NumberFormatException ex) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error con la informacion");
+                alert.setHeaderText("Ingrese un deposito valido");
+                alert.setContentText("El precio del desposito es inválido ,"
+                        + " por favor ingresar uno correcto");
+                alert.showAndWait();
+                return false;
+            }
+           
+        }
+        
+        
+
+        return true;
+    }
+    
+    private boolean validarBusquedaInmueble(Inmueble inmueble) {
+        if (txtBuscar.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con la informacion");
+            alert.setHeaderText("Ingresar el codigo primero para buscar Inmueble");
+            alert.showAndWait();
+            return false;
+        } else if (inmueble == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con la informacion");
+            alert.setHeaderText("Codigo de inmueble no existente");
+            alert.showAndWait();
+            return false;
+        }
+        if(inmueble.getTipoOperacion().equals("Venta")) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con el Inmueble");
+            alert.setHeaderText("EL inmueble con código ["+ inmueble.getCodigo()+ "]"
+            + " solo está disponible para Venta");
+            alert.showAndWait();
+            return false;
+        }
+        if(!inmueble.isDisponible()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con el Inmueble");
+            alert.setHeaderText("EL inmueble con código ["+ inmueble.getCodigo()+ "]"
+            + " ya no está disponible para Rentar");
+            alert.showAndWait();
+            return false;
+        }
+        
         return true;
     }
 
@@ -247,7 +361,7 @@ public class RegistrarRentaController implements Initializable {
         String codigoInmueble = txtBuscar.getText();
         inmu = buscarInmueble(codigoInmueble);
         
-        if (inmu != null) {
+        if (validarBusquedaInmueble(inmu)) {
             txtCodigoInmu.setText(inmu.getCodigo());
             txtDireccionInmu.setText(inmu.getDireccion());
             txtColoniaInmu.setText(inmu.getColonia());

@@ -14,4 +14,5 @@ import modelo.Inmueble;
  */
 public interface IInmuebleDao {
     public List<Inmueble> getInmuebles();
+    public boolean updateDisponibilidad(int idinmueble, boolean disponible);
 }

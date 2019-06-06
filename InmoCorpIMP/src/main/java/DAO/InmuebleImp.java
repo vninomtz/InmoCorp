@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Alert;
 import modelo.Inmueble;
 
 /**
@@ -23,10 +24,12 @@ public class InmuebleImp implements IInmuebleDao{
     public List<Inmueble> getInmuebles() {
         List<Inmueble> listaInmuebles = new ArrayList();
         Connection conexionBD = new ConexionBD().getConexionBD();
-        String sQuery = "SELECT * from inmueble_detalles";
+        String sQuery = "SELECT * from inmueble_detalles;";
+        String timeZone = "set global time_zone = '+3:00';";
         System.out.println(sQuery);
         try {
             Statement statement = conexionBD.createStatement();
+            statement.execute(timeZone);
             ResultSet rs = statement.executeQuery(sQuery);
             while (rs != null && rs.next()) {
                 Inmueble inmu = new Inmueble();
@@ -59,13 +62,15 @@ public class InmuebleImp implements IInmuebleDao{
                 inmu.getCliente().setCorreo(rs.getString("correo_cliente"));      
                 
                 //Se van a borrar estas consultas
-                
-                
-                System.out.println(inmu.getCodigo());
                 listaInmuebles.add(inmu);
             }
         } catch (SQLException ex) {
             System.out.println("Error en la creacion de el Statement: " + ex.getMessage());
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con BD");
+            alert.setHeaderText("Hubo un error con la conexión a la Base de Datos,"
+                    + "por favor intente más tarde");
+            alert.showAndWait();
         } finally {
             /*try {
                 conexionBD.close();
@@ -74,6 +79,37 @@ public class InmuebleImp implements IInmuebleDao{
             }*/
         }
         return listaInmuebles;
+    }
+
+    @Override
+    public boolean updateDisponibilidad(int idinmueble, boolean disponible) {
+        String sQuery = null; 
+        if(disponible){
+             sQuery = "UPDATE inmueble SET disponible = 1" + " WHERE idinmueble = " 
+                     + idinmueble + ";";           
+        }else {
+            sQuery = "UPDATE inmueble SET disponible = 0" + " WHERE idinmueble = " 
+                     + idinmueble + ";";   
+        }
+        System.out.println(sQuery);
+        Connection conexionBD = new ConexionBD().getConexionBD();
+         try {
+            Statement statement = conexionBD.createStatement();
+            int rs = statement.executeUpdate(sQuery);
+            if(rs == 1 || rs ==2  || rs == 0){
+                return true; 
+            }
+        } catch (SQLException ex) {
+           System.out.println("Error en la creacion de el Statement: " + ex);
+           return false;
+        } finally {
+            /*try {
+                conexionBD.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexion" + ex.getMessage());
+            }*/
+        }
+        return false;
     }
     
 }
