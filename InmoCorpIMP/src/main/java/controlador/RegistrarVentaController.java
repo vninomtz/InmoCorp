@@ -8,6 +8,7 @@ package controlador;
 import DAO.ClienteImp;
 import DAO.InmuebleImp;
 import DAO.TipoInmuebleImp;
+import DAO.VentaImp;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -16,8 +17,11 @@ import com.jfoenix.controls.JFXTextField;
 import inmocorp.inmobiliaria.MainApp;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -30,6 +34,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -92,45 +98,38 @@ public class RegistrarVentaController implements Initializable {
     private JFXButton btnBuscarCom;
     @FXML
     private JFXComboBox<TipoInmueble> cbTipoinmu;
-    
+
     public RegistrarVentaController maincontroller;
     private Cliente comprador;
-    
-            //tratar la excepción
-       
 
+    //tratar la excepción
     @FXML
     private void ventanaComprador() {
         try {
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/SeleccionarCliente.fxml"));
-            SeleccionarClienteController controller = (SeleccionarClienteController)loader.getController();
-            //controller.setController(maincontroller);
             AnchorPane anchorpane = loader.load();
             Scene scene = new Scene(anchorpane);
             scene.getStylesheets().add("/styles/Styles.css");
             Stage stage = new Stage();
             stage.setTitle("Registrar Cliente");
             stage.setScene(scene);
-            
-            stage.setOnHidden(new EventHandler<WindowEvent>(){
+            SeleccionarClienteController controller = (SeleccionarClienteController) loader.getController();
+            controller.setController(this);
+            stage.setOnHidden(new EventHandler<WindowEvent>() {
                 @Override
-                public void handle(WindowEvent event){
-                    comprador = controller.getComprador();
-                    if(comprador != null){
+                public void handle(WindowEvent event) {
                     txtNombreCom.setText(comprador.toString());
-                }else {
-                    System.out.println("No hay nada ");
-                }
                 }
             });
             stage.show();
-            
-            System.out.println(comprador);
         } catch (IOException ex) {
-            Logger.getLogger(SeleccionarClienteController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error al mostrar ventana Ventas: " + ex.getMessage());
         }
-        
-        
+
+    }
+
+    public void setComprador(Cliente comprador) {
+        this.comprador = comprador;
     }
 
     @FXML
@@ -153,15 +152,39 @@ public class RegistrarVentaController implements Initializable {
 
     public boolean validarCampos() {
         if (txtCodigoInmu.getText().isEmpty()) {
-            //JOptionPane.showMessageDialog(null, "Buscar el inmueble antes de registrar la renta");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Error con la informacion");
+            alert.setHeaderText("Buscar el inmueble antes de registrar la renta");
+            alert.showAndWait();
             return false;
         }
         if (txtFechaVen.getValue() == null) {
-            //JOptionPane.showMessageDialog(null, "Ingresar la fecha de inicio de la renta");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Error con la informacion");
+            alert.setHeaderText("Ingresar la fecha de la venta");
+            alert.showAndWait();
             return false;
+
+        } else {
+            LocalDate fechaVenta = txtFechaVen.getValue();
+            LocalDate fechaActual = LocalDate.now();
+
+            if (fechaVenta.compareTo(fechaActual) > 0) {
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("Error con la informacion");
+                alert.setHeaderText("Ingrese una fecha valida");
+                alert.setContentText("La fecha ingresada es mayor a la actual,"
+                        + " por favor seleccione una correcta");
+                alert.showAndWait();
+                return false;
+            }
+
         }
         if (txtNombreCom.getText().isEmpty()) {
-            //JOptionPane.showMessageDialog(null, "Buscar al comprador antes de registrar la renta");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Error con la informacion");
+            alert.setHeaderText("Buscar el comprador antes de registrar la venta");
+            alert.showAndWait();
             return false;
         }
 
@@ -206,30 +229,57 @@ public class RegistrarVentaController implements Initializable {
 
     @FXML
     private void botonRegistrarVenta() {
-        //if (validarCampos()) {
-        Venta venta = new Venta();
-        venta.setIdinmueble(inmu.getIdinmuble());
-        //venta.setIdcliente(comprador.getIdcliente());
-        LocalDate date = txtFechaVen.getValue();
-        venta.setFecha_venta(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-        date = txtFechaVen.getValue();
-        venta.setMonto(Double.parseDouble(txtTotalVen.getText()));
+        if (validarCampos()) {
+            Venta venta = new Venta();
+            venta.setIdinmueble(inmu.getIdinmuble());
+            venta.setIdcliente(comprador.getIdcliente());
+            LocalDate date = txtFechaVen.getValue();
+            venta.setFecha_venta(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            venta.setMonto(Double.parseDouble(txtTotalVen.getText()));
 
-        System.out.println("idInmueble: " + venta.getIdinmueble());
-        //System.out.println("idCliente: " + renta.getIdcliente());
-        System.out.println("fechaVenta: " + venta.getFecha_venta());
-        System.out.println("Monto: " + venta.getMonto());
+            System.out.println("idInmueble: " + venta.getIdinmueble());
+            System.out.println("idCliente: " + venta.getIdcliente());
+            System.out.println("fechaVenta: " + venta.getFecha_venta());
+            System.out.println("Monto: " + venta.getMonto());
+            VentaImp ventaImp = new VentaImp();
+            if (ventaImp.guardarVenta(venta)) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Estado de registro");
+                alert.setHeaderText("Registro guardado exitosamente");
 
-        //}
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Estado de registro");
+                alert.setHeaderText("Ocurrio un erorr al guardar");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    private boolean validarBusquedaInmueble(Inmueble inmueble) {
+        if (txtBuscarInm.getText().isEmpty()) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Error con la informacion");
+            alert.setHeaderText("Ingresar el codigo primero para buscar Inmueble");
+            alert.showAndWait();
+            return false;
+        } else if (inmueble == null) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Error con la informacion");
+            alert.setHeaderText("Codigo de inmueble no existente");
+            alert.showAndWait();
+            return false;
+        }
+        return true;
     }
 
     @FXML
     private void botonBuscarInmueble() {
-        ClienteImp clienteimp = new ClienteImp();
         String codigoInmueble = txtBuscarInm.getText();
         inmu = buscarInmueble(codigoInmueble);
-        System.out.println("Akfkfkf::" + codigoInmueble);
-        if (inmu != null) {
+
+        if (validarBusquedaInmueble(inmu)) {
             txtCodigoInmu.setText(inmu.getCodigo());
             txtDireccionInmu.setText(inmu.getDireccion());
             txtColoniaInmu.setText(inmu.getColonia());
@@ -239,15 +289,16 @@ public class RegistrarVentaController implements Initializable {
             txtDescripcionInmu.setText(inmu.getNotas());
             txtTotalVen.setText(Double.toString(inmu.getPrecioventa()));
 
+            ClienteImp clienteimp = new ClienteImp();
+            Cliente cliente = clienteimp.getCliente(inmu.getIdcliente());
+            if (cliente != null) {
+                txtNombreVen.setText(cliente.toString());
+                txtCorreoVen.setText(cliente.getCorreo());
+                txtTelefonoVen.setText(cliente.getTelefono());
+            }
+
         }
 
-        Cliente cliente = clienteimp.getCliente(inmu.getIdcliente());
-        System.out.println("ObjetoCliente id: " + cliente.getNombre());
-        if (cliente != null) {
-            txtNombreVen.setText(cliente.toString());
-            txtCorreoVen.setText(cliente.getCorreo());
-            txtTelefonoVen.setText(cliente.getTelefono());
-        }
     }
 
     private void iniciarInterfaz() {
@@ -258,6 +309,12 @@ public class RegistrarVentaController implements Initializable {
         cbTipoinmu.setEditable(false);
         txtPrecioInmu.setEditable(false);
         txtDescripcionInmu.setEditable(false);
+        txtNombreCom.setEditable(false);
+        txtCorreoCom.setEditable(false);
+        txtTelefonoCom.setEditable(false);
+        txtNombreVen.setEditable(false);
+        txtCorreoVen.setEditable(false);
+        txtTelefonoVen.setEditable(false);
     }
 
     private void llenarCbTipoInmueble() {
