@@ -19,7 +19,7 @@ public class VentaImp implements IVentaDao{
     
     @Override
     public boolean guardarVenta(Venta venta) {
-        String query = "INSERT INTO contacto(fecha_venta,monto,idcliente,idinmueble) VALUES ('" + venta.getFecha_venta()+ "','"
+        String query = "INSERT INTO venta(fecha_venta,monto,idcliente,idinmueble) VALUES ('" + venta.getFecha_venta()+ "','"
                 + venta.getMonto() + "','" + venta.getIdcliente()+ "','" + venta.getIdinmueble()+ "');";
         System.out.println(query);
         Connection conexionBD = new ConexionBD().getConexionBD();

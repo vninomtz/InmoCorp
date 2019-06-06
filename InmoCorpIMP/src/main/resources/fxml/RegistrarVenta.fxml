@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -29,7 +28,7 @@
                 <JFXTextField fx:id="txtDireccionInmu" labelFloat="true" layoutX="175.0" layoutY="94.0" promptText="Dirección" />
                 <JFXTextField fx:id="txtPrecioInmu" labelFloat="true" layoutX="14.0" layoutY="185.0" promptText="Precio de Venta" />
                 <JFXTextArea fx:id="txtDescripcionInmu" labelFloat="true" layoutX="163.0" layoutY="140.0" prefHeight="70.0" prefWidth="315.0" promptText="Descripción" />
-            <JFXComboBox fx:id="cbTipoinmu" labelFloat="true" layoutX="325.0" layoutY="94.0" prefHeight="25.0" prefWidth="164.0" promptText="Tipo" />
+            <JFXTextField fx:id="txtTipoInmu" labelFloat="true" layoutX="337.0" layoutY="94.0" promptText="Tipo" />
             </children>
         </AnchorPane>
         <AnchorPane layoutX="518.0" layoutY="81.0" prefHeight="230.0" prefWidth="281.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 10px;">

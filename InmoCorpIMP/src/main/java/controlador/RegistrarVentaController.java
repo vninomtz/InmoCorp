@@ -96,8 +96,6 @@ public class RegistrarVentaController implements Initializable {
     public JFXTextField txtTelefonoCom;
     @FXML
     private JFXButton btnBuscarCom;
-    @FXML
-    private JFXComboBox<TipoInmueble> cbTipoinmu;
 
     public RegistrarVentaController maincontroller;
     private Cliente comprador;
@@ -119,6 +117,8 @@ public class RegistrarVentaController implements Initializable {
                 @Override
                 public void handle(WindowEvent event) {
                     txtNombreCom.setText(comprador.toString());
+                    txtCorreoCom.setText(comprador.getCorreo());
+                    txtTelefonoCom.setText(comprador.getTelefono());
                 }
             });
             stage.show();
@@ -243,11 +243,21 @@ public class RegistrarVentaController implements Initializable {
             System.out.println("Monto: " + venta.getMonto());
             VentaImp ventaImp = new VentaImp();
             if (ventaImp.guardarVenta(venta)) {
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Estado de registro");
-                alert.setHeaderText("Registro guardado exitosamente");
+                InmuebleImp inmuImp = new InmuebleImp();
+                if (inmuImp.updateDisponibilidad(inmu.getIdinmuble(), false)) {
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Estado de registro");
+                    alert.setHeaderText("Registro guardado exitosamente");
 
+                    alert.showAndWait();
+                } else {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Estado de registro");
+                alert.setHeaderText("Ocurrio un erorr al guardar");
                 alert.showAndWait();
+
+                }
+
             } else {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Estado de registro");
@@ -271,6 +281,23 @@ public class RegistrarVentaController implements Initializable {
             alert.showAndWait();
             return false;
         }
+        if (inmueble.getTipoOperacion().equals("Renta")) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con el Inmueble");
+            alert.setHeaderText("EL inmueble con código [" + inmueble.getCodigo() + "]"
+                    + " solo está disponible para Renta");
+            alert.showAndWait();
+            return false;
+        }
+        if (!inmueble.isDisponible()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con el Inmueble");
+            alert.setHeaderText("EL inmueble con código [" + inmueble.getCodigo() + "]"
+                    + " ya no está disponible para Venta");
+            alert.showAndWait();
+            return false;
+        }
+
         return true;
     }
 
@@ -284,18 +311,12 @@ public class RegistrarVentaController implements Initializable {
             txtDireccionInmu.setText(inmu.getDireccion());
             txtColoniaInmu.setText(inmu.getColonia());
             txtCiudadInmu.setText(Integer.toString(inmu.getIdciudad()));
-            cbTipoinmu.getSelectionModel().select(inmu.getIdtipoinmueble() - 1);
             txtPrecioInmu.setText(Double.toString(inmu.getPrecioventa()));
             txtDescripcionInmu.setText(inmu.getNotas());
             txtTotalVen.setText(Double.toString(inmu.getPrecioventa()));
-
-            ClienteImp clienteimp = new ClienteImp();
-            Cliente cliente = clienteimp.getCliente(inmu.getIdcliente());
-            if (cliente != null) {
-                txtNombreVen.setText(cliente.toString());
-                txtCorreoVen.setText(cliente.getCorreo());
-                txtTelefonoVen.setText(cliente.getTelefono());
-            }
+            txtNombreVen.setText(inmu.getCliente().toString());
+            txtCorreoVen.setText(inmu.getCliente().getCorreo());
+            txtTelefonoVen.setText(inmu.getCliente().getTelefono());
 
         }
 
@@ -306,7 +327,6 @@ public class RegistrarVentaController implements Initializable {
         txtDireccionInmu.setEditable(false);
         txtColoniaInmu.setEditable(false);
         txtCiudadInmu.setEditable(false);
-        cbTipoinmu.setEditable(false);
         txtPrecioInmu.setEditable(false);
         txtDescripcionInmu.setEditable(false);
         txtNombreCom.setEditable(false);
@@ -315,12 +335,9 @@ public class RegistrarVentaController implements Initializable {
         txtNombreVen.setEditable(false);
         txtCorreoVen.setEditable(false);
         txtTelefonoVen.setEditable(false);
-    }
-
-    private void llenarCbTipoInmueble() {
-        TipoInmuebleImp tipoinmuebleimp = new TipoInmuebleImp();
-        ObservableList<TipoInmueble> observablelisttipo = FXCollections.observableArrayList(tipoinmuebleimp.getTipoInmuebles());
-        cbTipoinmu.setItems(observablelisttipo);
+        LocalDate FechaActual = LocalDate.now();
+        txtFechaVen.setDisable(false);
+        txtFechaVen.setValue(FechaActual);
 
     }
 
@@ -345,7 +362,7 @@ public class RegistrarVentaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         iniciarInterfaz();
-        llenarCbTipoInmueble();
+
         maincontroller = this;
     }
 

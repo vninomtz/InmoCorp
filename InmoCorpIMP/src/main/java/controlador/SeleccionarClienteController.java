@@ -70,7 +70,14 @@ public class SeleccionarClienteController implements Initializable {
         comprador = obtenerClienteSeleccionado();
         System.out.println(comprador);
         if(comprador != null){
-            controllerRenta.setComprador(comprador);
+            
+            if(controllerRenta != null){
+                controllerRenta.setComprador(comprador);
+            }else{
+                controllerVenta.setComprador(comprador);
+            }
+            
+            
             Stage principal = (Stage) btSeleccionar.getScene().getWindow();
             principal.close();
         }else {
