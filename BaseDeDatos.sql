@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `inmocorp` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `inmocorp`;
 -- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: inmocorp
@@ -199,11 +197,13 @@ DROP TABLE IF EXISTS `fotos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `fotos` (
+  `idfoto` int(11) NOT NULL AUTO_INCREMENT,
   `ruta` varchar(100) DEFAULT NULL,
   `idinmueble` int(11) NOT NULL,
+  PRIMARY KEY (`idfoto`),
   KEY `fk_fotos_inmueble1` (`idinmueble`),
   CONSTRAINT `fk_fotos_inmueble1` FOREIGN KEY (`idinmueble`) REFERENCES `inmueble` (`idinmueble`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,6 +212,7 @@ CREATE TABLE `fotos` (
 
 LOCK TABLES `fotos` WRITE;
 /*!40000 ALTER TABLE `fotos` DISABLE KEYS */;
+INSERT INTO `fotos` VALUES (1,'departamentoIM001.jpg',2),(2,'departamentoIM001 (2).jpg',2),(3,'IM002casa_alberca.jpg',3),(4,'IM002Casilla.jpg',3);
 /*!40000 ALTER TABLE `fotos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,6 +230,7 @@ CREATE TABLE `inmueble` (
   `disponible` tinyint(4) DEFAULT NULL,
   `notas` varchar(100) DEFAULT NULL,
   `colonia` varchar(20) NOT NULL,
+  `tipo_operacion` varchar(11) DEFAULT NULL,
   `precio_venta` float DEFAULT NULL,
   `precio_renta` float DEFAULT NULL,
   `idtipo_inmueble` int(11) NOT NULL,
@@ -250,9 +252,45 @@ CREATE TABLE `inmueble` (
 
 LOCK TABLES `inmueble` WRITE;
 /*!40000 ALTER TABLE `inmueble` DISABLE KEYS */;
-INSERT INTO `inmueble` VALUES (2,'IM001','El Olmo, Xalapa Enríquez, Ver., México',1,'Departamento en renta en la Col. El Olmo, a un paso de Plaza Américas','El Olmo',0,5150,1,1,1),(3,'IM002','Monte Magno, Residencial Monte Magno, Zona Ánimas',1,'3 recámaras en segunda planta. Recámara principal con baño completo, clóset y balcón','Ánimas',2000000,0,2,1,1);
+INSERT INTO `inmueble` VALUES (2,'IM001','El Olmo, Xalapa Enríquez, Ver., México',1,'Departamento en renta en la Col. El Olmo, a un paso de Plaza Américas','El Olmo','Renta',0,5150,1,1,1),(3,'IM002','Monte Magno, Residencial Monte Magno, Zona Ánimas',1,'3 recámaras en segunda planta. Recámara principal con baño completo, clóset y balcón','Ánimas','Venta',2000000,0,2,1,1);
 /*!40000 ALTER TABLE `inmueble` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `inmueble_detalles`
+--
+
+DROP TABLE IF EXISTS `inmueble_detalles`;
+/*!50001 DROP VIEW IF EXISTS `inmueble_detalles`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8mb4;
+/*!50001 CREATE VIEW `inmueble_detalles` AS SELECT 
+ 1 AS `idinmueble`,
+ 1 AS `idcliente`,
+ 1 AS `idtipo_inmueble`,
+ 1 AS `idciudad`,
+ 1 AS `codigo_inmueble`,
+ 1 AS `direccion_inmueble`,
+ 1 AS `disponible`,
+ 1 AS `notas`,
+ 1 AS `colonia_inmueble`,
+ 1 AS `tipo_operacion`,
+ 1 AS `precio_venta`,
+ 1 AS `precio_renta`,
+ 1 AS `ciudad_inmueble`,
+ 1 AS `tipo_inmueble`,
+ 1 AS `nombre_cliente`,
+ 1 AS `paterno_cliente`,
+ 1 AS `materno_cliente`,
+ 1 AS `telefono_cliente`,
+ 1 AS `calle_cliente`,
+ 1 AS `colonia_cliente`,
+ 1 AS `codigo_postal_cliente`,
+ 1 AS `rfc_cliente`,
+ 1 AS `tipo_cliente`,
+ 1 AS `idacceso_cliente`,
+ 1 AS `correo_cliente`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `renta`
@@ -270,11 +308,12 @@ CREATE TABLE `renta` (
   `idcliente` int(11) NOT NULL,
   `idinmueble` int(11) NOT NULL,
   PRIMARY KEY (`idrenta`),
+  UNIQUE KEY `idinmueble_UNIQUE` (`idinmueble`),
+  UNIQUE KEY `idrenta_UNIQUE` (`idrenta`),
   KEY `fk_renta_cliente1` (`idcliente`),
-  KEY `fk_renta_inmueble1` (`idinmueble`),
   CONSTRAINT `fk_renta_cliente1` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`),
   CONSTRAINT `fk_renta_inmueble1` FOREIGN KEY (`idinmueble`) REFERENCES `inmueble` (`idinmueble`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -283,7 +322,7 @@ CREATE TABLE `renta` (
 
 LOCK TABLES `renta` WRITE;
 /*!40000 ALTER TABLE `renta` DISABLE KEYS */;
-INSERT INTO `renta` VALUES (3,'23/05/2019','23/05/2020',1000,5800,1,2);
+INSERT INTO `renta` VALUES (6,'06/06/2019','07/06/2019',0,5974,2,2);
 /*!40000 ALTER TABLE `renta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,8 +364,9 @@ CREATE TABLE `venta` (
   `idcliente` int(11) NOT NULL,
   `idinmueble` int(11) NOT NULL,
   PRIMARY KEY (`idventa`),
+  UNIQUE KEY `idventa_UNIQUE` (`idventa`),
+  UNIQUE KEY `idinmueble_UNIQUE` (`idinmueble`),
   KEY `fk_venta_cliente1` (`idcliente`),
-  KEY `fk_venta_inmueble1` (`idinmueble`),
   CONSTRAINT `fk_venta_cliente1` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`),
   CONSTRAINT `fk_venta_inmueble1` FOREIGN KEY (`idinmueble`) REFERENCES `inmueble` (`idinmueble`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -340,6 +380,24 @@ LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Final view structure for view `inmueble_detalles`
+--
+
+/*!50001 DROP VIEW IF EXISTS `inmueble_detalles`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `inmueble_detalles` AS select `i`.`idinmueble` AS `idinmueble`,`i`.`idcliente` AS `idcliente`,`i`.`idtipo_inmueble` AS `idtipo_inmueble`,`i`.`idciudad` AS `idciudad`,`i`.`codigo` AS `codigo_inmueble`,`i`.`direccion` AS `direccion_inmueble`,`i`.`disponible` AS `disponible`,`i`.`notas` AS `notas`,`i`.`colonia` AS `colonia_inmueble`,`i`.`tipo_operacion` AS `tipo_operacion`,`i`.`precio_venta` AS `precio_venta`,`i`.`precio_renta` AS `precio_renta`,`c`.`ciudad` AS `ciudad_inmueble`,`t`.`tipo` AS `tipo_inmueble`,`p`.`nombre` AS `nombre_cliente`,`p`.`paterno` AS `paterno_cliente`,`p`.`materno` AS `materno_cliente`,`p`.`telefono` AS `telefono_cliente`,`p`.`calle` AS `calle_cliente`,`p`.`colonia` AS `colonia_cliente`,`p`.`codigo_postal` AS `codigo_postal_cliente`,`p`.`rfc` AS `rfc_cliente`,`p`.`tipo` AS `tipo_cliente`,`p`.`idacceso` AS `idacceso_cliente`,`p`.`correo` AS `correo_cliente` from (((`inmueble` `i` join `ciudad` `c` on((`i`.`idciudad` = `c`.`idciudad`))) join `tipo_inmueble` `t` on((`i`.`idtipo_inmueble` = `t`.`idtipo_inmueble`))) join `cliente` `p` on((`i`.`idcliente` = `p`.`idcliente`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -350,4 +408,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-24 10:20:01
+-- Dump completed on 2019-06-06 22:48:17
