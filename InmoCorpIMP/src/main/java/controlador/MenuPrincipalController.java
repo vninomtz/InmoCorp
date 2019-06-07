@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import static javafx.application.Platform.exit;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -24,10 +25,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import modelo.Inmueble;
@@ -42,7 +45,9 @@ public class MenuPrincipalController implements Initializable {
 
     List<Inmueble> listaInmueble = new ArrayList();
     @FXML private JFXButton btnSalir;
-    @FXML private JFXTextField txtBuscarInmu;
+    @FXML private JFXButton btnVerDetalles;
+    @FXML private JFXButton btnConsultar;
+    @FXML private JFXTextField txtBuscarInmu; 
     @FXML private JFXButton btnBuscarInmu;
     @FXML private JFXComboBox<TipoInmueble> cbTipoInmu;
     @FXML private JFXComboBox<String> cbTipoOperacion;
@@ -108,6 +113,40 @@ public class MenuPrincipalController implements Initializable {
             System.out.println("Error al mostrar ventana Rentas: " + ex);
         }
     }
+    @FXML
+    private void verDetalles() {
+        Inmueble inmu = obtenerInmuebleSeleccionado();
+        if(inmu != null){
+            try {
+                FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/InformacionDetallada.fxml"));
+                AnchorPane anchorpane = loader.load();
+                Scene scene = new Scene(anchorpane);
+                scene.getStylesheets().add("/styles/Styles.css");
+                Stage stage = new Stage();
+                InformacionDetalladaController controller = (InformacionDetalladaController)loader.getController();
+                controller.setController(this, inmu);
+
+                stage.setTitle("Detalle Inmueble");
+                stage.setScene(scene);
+                stage.alwaysOnTopProperty();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+            } catch (IOException ex) {
+                System.out.println("Error al mostrar ventana Rentas: " + ex);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Seleccionar Inmuble");
+                    alert.setHeaderText("Para ver el detalle del inmueble "
+                            + "por favor seleccione el inmuble");
+                    alert.showAndWait();
+        }
+        
+    }
+    @FXML
+    private void salir() {
+        exit();
+    }
     
     private void llenarCbTipoInmueble() {
         TipoInmuebleImp tipoinmuebleimp = new TipoInmuebleImp();
@@ -130,9 +169,9 @@ public class MenuPrincipalController implements Initializable {
         TipoInmuebleImp tipoinmuebleimp = new TipoInmuebleImp();
         List<TipoInmueble> listaTipoCd = tipoinmuebleimp.getTipoInmuebles();
         colTipoOperacion.setCellValueFactory(new PropertyValueFactory("tipoOperacion"));
-        colTipoInmu.setCellValueFactory(new PropertyValueFactory("idtipoinmueble"));
+        colTipoInmu.setCellValueFactory(new PropertyValueFactory("tipoInmuble"));
         colDescripcion.setCellValueFactory(new PropertyValueFactory("notas"));
-        colCiudad.setCellValueFactory(new PropertyValueFactory("idciudad"));
+        colCiudad.setCellValueFactory(new PropertyValueFactory("ciudad"));
         colColonia.setCellValueFactory(new PropertyValueFactory("colonia"));
         colPrecioRenta.setCellValueFactory(new PropertyValueFactory("preciorenta"));
         colPrecioVenta.setCellValueFactory(new PropertyValueFactory("precioventa"));
@@ -140,6 +179,15 @@ public class MenuPrincipalController implements Initializable {
         listaInmueble = controller.getInmuebles();
         ObservableList<Inmueble> observableListInmu = FXCollections.observableArrayList(listaInmueble);
         tablaInmueble.setItems(observableListInmu);
+    }
+    
+        public Inmueble obtenerInmuebleSeleccionado() {
+        if (tablaInmueble != null) {
+            Inmueble inmu = tablaInmueble.getSelectionModel().getSelectedItem();
+            return inmu;
+        } else {
+            return null;
+        }
     }
     private void iniciarInterfaz() {
         llenarCbTipoInmueble();
@@ -149,7 +197,7 @@ public class MenuPrincipalController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //iniciarInterfaz();
+        iniciarInterfaz();
     }
     
 }

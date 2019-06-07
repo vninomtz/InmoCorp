@@ -13,7 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="570.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.MenuPrincipalController">
+<AnchorPane id="AnchorPane" prefHeight="497.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.MenuPrincipalController">
    <children>
       <MenuBar layoutX="24.0" layoutY="24.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <menus>
@@ -35,7 +35,7 @@
             </Menu>
          </menus>
       </MenuBar>
-      <JFXButton fx:id="btnSalir" layoutX="745.0" layoutY="528.0" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: #009688;" text="Salir" />
+      <JFXButton fx:id="btnSalir" layoutX="23.0" layoutY="451.0" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: #009688;" text="Salir" />
       <ImageView fitHeight="111.0" fitWidth="150.0" layoutX="23.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="23.0">
          <image>
             <Image url="@img/Logo.png" />
@@ -47,7 +47,8 @@
          <children>
             <Label layoutX="14.0" layoutY="6.0" text="Filtrar Resultados" />
             <JFXComboBox fx:id="cbTipoInmu" labelFloat="true" layoutX="14.0" layoutY="38.0" prefHeight="25.0" prefWidth="127.0" promptText="Tipo Inmueble" />
-            <JFXComboBox fx:id="cbTipoOperacion" labelFloat="true" layoutX="189.0" layoutY="38.0" prefHeight="25.0" prefWidth="119.0" promptText="Tipo Operación" />
+            <JFXComboBox fx:id="cbTipoOperacion" labelFloat="true" layoutX="151.0" layoutY="38.0" prefHeight="25.0" prefWidth="119.0" promptText="Tipo Operación" />
+            <JFXButton fx:id="btnConsultar" buttonType="RAISED" layoutX="300.0" layoutY="40.0" style="-fx-background-color: #009688;" text="Consultar" />
          </children>
       </AnchorPane>
       <TableView fx:id="tablaInmueble" layoutX="10.0" layoutY="177.0" prefHeight="245.0" prefWidth="799.0">
@@ -61,5 +62,6 @@
             <TableColumn fx:id="colPrecioVenta" editable="false" prefWidth="92.0" resizable="false" text="Precio Venta" />
         </columns>
       </TableView>
+      <JFXButton fx:id="btnVerDetalles" buttonType="RAISED" layoutX="681.0" layoutY="439.0" onAction="#verDetalles" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #009688;" text="Ver Detalles" />
    </children>
 </AnchorPane>

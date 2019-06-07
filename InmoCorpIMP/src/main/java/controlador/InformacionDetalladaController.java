@@ -10,9 +10,12 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
-import static javafx.application.Platform.exit;
+import javafx.scene.image.Image;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import modelo.Inmueble;
 
 /**
  * FXML Controller class
@@ -41,18 +44,50 @@ public class InformacionDetalladaController implements Initializable {
     private JFXTextField txtTipoOperacion;
     @FXML
     private JFXButton btnSalir;
+    @FXML
+    private JFXButton btnSiguiente;
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private JFXButton btnAnterior;
+    
+    @FXML
+    private ImageView img;
+    
+    
+    MenuPrincipalController menuprincipal;
+    Inmueble inmu;
+
+    public void setController(MenuPrincipalController controller, Inmueble inmu){
+       this.menuprincipal = controller;
+       this.inmu = inmu;
+       if(inmu != null){
+           iniciarInterfaz();
+       }
+    }
+    public void iniciarInterfaz() {
+        txtCodigoInmu.setText(inmu.getCodigo());
+        txtColoniaInmu.setText(inmu.getColonia());
+        txtDireccionInmu.setText(inmu.getDireccion());
+        txtTipoInmu.setText(inmu.getTipoInmuble());
+        txtDescripcionInmu.setText(inmu.getNotas());
+        txtCiudadInmu.setText(inmu.getCiudad());
+        txtPrecioInmu.setText(Double.toString(inmu.getPrecioventa()));
+        txtPrecioRenta.setText(Double.toString(inmu.getPreciorenta()));
+        txtTipoOperacion.setText(inmu.getTipoOperacion());
+        
+        Image image = new Image("/fxml/img/que-es-bien-inmueble.jpg");
+        img.setImage(image);
+                
+    }
     
     @FXML
     private void salir() {
-        exit();
+        Stage principal = (Stage) btnSalir.getScene().getWindow();
+            principal.close();
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
     
 }

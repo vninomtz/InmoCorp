@@ -98,23 +98,6 @@ public class RegistrarRentaController implements Initializable {
     @FXML
     private JFXButton btnBuscarCom;
 
-    @FXML
-    private void ventanaComprador() {
-        try {
-            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/SeleccionarCliente.fxml"));
-            AnchorPane anchorpane = loader.load();
-            Scene scene = new Scene(anchorpane);
-            scene.getStylesheets().add("/styles/Styles.css");
-            Stage stage = new Stage();
-            stage.setTitle("Registrar Cliente");
-            stage.setScene(scene);
-            stage.show();
-            Stage principal = (Stage) btnSalir.getScene().getWindow();
-            principal.close();
-        } catch (IOException ex) {
-            Logger.getLogger(SeleccionarClienteController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     @FXML
     private void ventanaVenta() {
