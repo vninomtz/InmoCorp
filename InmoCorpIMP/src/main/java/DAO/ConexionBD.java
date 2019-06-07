@@ -15,13 +15,14 @@ import javafx.scene.control.Alert;
  * @author Vik-t
  */
 public class ConexionBD {
+
     private Connection conexion;
     private final String host = "localhost";
     private final String db = "inmocorp";
     private final String username = "administrador";
     private final String password = "inmobiliaria";
     private final String url = "jdbc:mysql://" + host + "/" + db;
-    
+
     public ConexionBD() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -39,10 +40,11 @@ public class ConexionBD {
             System.out.println("Error en la instancia del controlador: " + ex.getMessage());
         }
     }
-    
+
     public Connection getConexionBD() {
         return conexion;
     }
+
     public void closeConexionBD() {
         try {
             conexion.close();

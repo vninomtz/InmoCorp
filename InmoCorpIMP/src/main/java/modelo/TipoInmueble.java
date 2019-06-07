@@ -10,6 +10,7 @@ package modelo;
  * @author Vik-t
  */
 public class TipoInmueble {
+
     private int idtipoinmueble;
     private String tipo;
 
@@ -36,9 +37,9 @@ public class TipoInmueble {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return tipo;
     }
 }

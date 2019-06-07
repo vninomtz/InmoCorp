@@ -13,5 +13,6 @@ import modelo.TipoInmueble;
  * @author Vik-t
  */
 public interface ITipoInmuebleDao {
+
     public List<TipoInmueble> getTipoInmuebles();
 }

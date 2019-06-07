@@ -12,5 +12,6 @@ import modelo.Venta;
  * @author alanglezh
  */
 public interface IVentaDao {
-    public boolean guardarVenta (Venta venta);
+
+    public boolean guardarVenta(Venta venta);
 }

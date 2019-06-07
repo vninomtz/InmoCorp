@@ -58,7 +58,7 @@ public class RegistrarRentaController implements Initializable {
     private JFXButton btnBuscar;
     @FXML
     private JFXTextField txtCodigoInmu;
-    
+
     @FXML
     private JFXTextField txtCiudadInmu;
     @FXML
@@ -97,7 +97,6 @@ public class RegistrarRentaController implements Initializable {
     private JFXTextField txtTelefonoCom;
     @FXML
     private JFXButton btnBuscarCom;
-
 
     @FXML
     private void ventanaVenta() {
@@ -152,6 +151,7 @@ public class RegistrarRentaController implements Initializable {
             System.out.println("Error al mostrar ventana Ventas: " + ex.getMessage());
         }
     }
+
     @FXML
     private void ventanaSeleccionarCliente() {
         try {
@@ -162,26 +162,27 @@ public class RegistrarRentaController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Registrar Rentas");
             stage.setScene(scene);
-            SeleccionarClienteController controller = (SeleccionarClienteController)loader.getController();
+            SeleccionarClienteController controller = (SeleccionarClienteController) loader.getController();
             controller.setController(this);
-            stage.setOnHidden(new EventHandler<WindowEvent>(){
+            stage.setOnHidden(new EventHandler<WindowEvent>() {
                 @Override
-                public void handle(WindowEvent event){
-                     txtNombreCom.setText(comprador.toString());
-                     txtCorreoCom.setText(comprador.getCorreo());
-                     txtTelefonoCom.setText(comprador.getTelefono());
+                public void handle(WindowEvent event) {
+                    txtNombreCom.setText(comprador.toString());
+                    txtCorreoCom.setText(comprador.getCorreo());
+                    txtTelefonoCom.setText(comprador.getTelefono());
                 }
             });
             stage.show();
         } catch (IOException ex) {
             System.out.println("Error al mostrar ventana Ventas: " + ex.getMessage());
         }
-        
-       
+
     }
+
     public void setComprador(Cliente comprador) {
         this.comprador = comprador;
     }
+
     @FXML
     private void botonRegistrarRenta() {
         if (validarCampos()) {
@@ -197,27 +198,24 @@ public class RegistrarRentaController implements Initializable {
 
             InmuebleImp inmuebleimp = new InmuebleImp();
             RentaImp rentaimp = new RentaImp();
-            if(rentaimp.guardarRenta(renta)) {
-                if(inmuebleimp.updateDisponibilidad(inmu.getIdinmuble(), false)) {
+            if (rentaimp.guardarRenta(renta)) {
+                if (inmuebleimp.updateDisponibilidad(inmu.getIdinmuble(), false)) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Renta Guardada");
                     alert.setHeaderText("La renta se a guardado Exitosamente");
                     alert.showAndWait();
                     ventanaPrincipal();
                 }
-            }else {
+            } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error en BD");
                 alert.setHeaderText("Hubo un error en la conexión a la Base de Datos"
                         + "Por favor intente más tarde");
                 alert.showAndWait();
             }
-            
 
         }
     }
-
-   
 
     public boolean validarCampos() {
         if (txtCodigoInmu.getText().isEmpty()) {
@@ -227,7 +225,7 @@ public class RegistrarRentaController implements Initializable {
             alert.showAndWait();
             return false;
         }
-        
+
         //Inicio fecha inicio renta
         if (txtFechaInicioRen.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -271,7 +269,7 @@ public class RegistrarRentaController implements Initializable {
                 return false;
             }
         }
-        
+
         if (txtNombreCom.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Error con la informacion");
@@ -287,8 +285,8 @@ public class RegistrarRentaController implements Initializable {
             return false;
         } else {
             try {
-                 Double deposito = Double.parseDouble(txtDepositoRen.getText());
-            } catch(NumberFormatException ex) {
+                Double deposito = Double.parseDouble(txtDepositoRen.getText());
+            } catch (NumberFormatException ex) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error con la informacion");
                 alert.setHeaderText("Ingrese un deposito valido");
@@ -297,14 +295,12 @@ public class RegistrarRentaController implements Initializable {
                 alert.showAndWait();
                 return false;
             }
-           
+
         }
-        
-        
 
         return true;
     }
-    
+
     private boolean validarBusquedaInmueble(Inmueble inmueble) {
         if (txtBuscar.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -319,23 +315,23 @@ public class RegistrarRentaController implements Initializable {
             alert.showAndWait();
             return false;
         }
-        if(inmueble.getTipoOperacion().equals("Venta")) {
+        if (inmueble.getTipoOperacion().equals("Venta")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Error con el Inmueble");
-            alert.setHeaderText("EL inmueble con código ["+ inmueble.getCodigo()+ "]"
-            + " solo está disponible para Venta");
+            alert.setHeaderText("EL inmueble con código [" + inmueble.getCodigo() + "]"
+                    + " solo está disponible para Venta");
             alert.showAndWait();
             return false;
         }
-        if(!inmueble.isDisponible()) {
+        if (!inmueble.isDisponible()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Error con el Inmueble");
-            alert.setHeaderText("EL inmueble con código ["+ inmueble.getCodigo()+ "]"
-            + " ya no está disponible para Rentar");
+            alert.setHeaderText("EL inmueble con código [" + inmueble.getCodigo() + "]"
+                    + " ya no está disponible para Rentar");
             alert.showAndWait();
             return false;
         }
-        
+
         return true;
     }
 
@@ -343,7 +339,7 @@ public class RegistrarRentaController implements Initializable {
     private void botonBuscarInmueble() {
         String codigoInmueble = txtBuscar.getText();
         inmu = buscarInmueble(codigoInmueble);
-        
+
         if (validarBusquedaInmueble(inmu)) {
             txtCodigoInmu.setText(inmu.getCodigo());
             txtDireccionInmu.setText(inmu.getDireccion());
@@ -369,11 +365,11 @@ public class RegistrarRentaController implements Initializable {
         txtPrecioInmu.setEditable(false);
         txtDescripcionInmu.setEditable(false);
         txtTotalRen.setEditable(false);
-        
+
         txtNombreVen.setEditable(false);
         txtCorreoVen.setEditable(false);
         txtTelefonoVen.setEditable(false);
-        
+
         txtNombreCom.setEditable(false);
         txtCorreoCom.setEditable(false);
         txtTelefonoCom.setEditable(false);
@@ -400,7 +396,7 @@ public class RegistrarRentaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         iniciarInterfaz();
-        
+
     }
 
 }

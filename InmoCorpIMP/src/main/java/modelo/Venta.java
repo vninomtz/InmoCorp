@@ -10,6 +10,7 @@ package modelo;
  * @author alanglezh
  */
 public class Venta {
+
     private int idVenta;
     private String fecha_venta;
     private double monto;
@@ -25,7 +26,7 @@ public class Venta {
     }
 
     public Venta() {
-        
+
     }
 
     public int getIdVenta() {
@@ -72,6 +73,5 @@ public class Venta {
     public String toString() {
         return "Venta{" + "idVenta=" + idVenta + ", fecha_venta=" + fecha_venta + ", monto=" + monto + ", idcliente=" + idcliente + ", idinmueble=" + idinmueble + '}';
     }
-    
-    
+
 }

@@ -53,24 +53,24 @@ public class InformacionDetalladaController implements Initializable {
 
     @FXML
     private JFXButton btnAnterior;
-    
+
     @FXML
     private ImageView img;
-    
+
     private ListIterator<Foto> listaFotos;
     Image image;
-    
-    
+
     MenuPrincipalController menuprincipal;
     Inmueble inmu;
 
-    public void setController(MenuPrincipalController controller, Inmueble inmu){
-       this.menuprincipal = controller;
-       this.inmu = inmu;
-       if(inmu != null){
-           iniciarInterfaz();
-       }
+    public void setController(MenuPrincipalController controller, Inmueble inmu) {
+        this.menuprincipal = controller;
+        this.inmu = inmu;
+        if (inmu != null) {
+            iniciarInterfaz();
+        }
     }
+
     public void iniciarInterfaz() {
         FotosImp fotosimp = new FotosImp();
         listaFotos = fotosimp.getFotos(inmu.getIdinmuble()).listIterator();
@@ -83,33 +83,35 @@ public class InformacionDetalladaController implements Initializable {
         txtPrecioInmu.setText(Double.toString(inmu.getPrecioventa()));
         txtPrecioRenta.setText(Double.toString(inmu.getPreciorenta()));
         txtTipoOperacion.setText(inmu.getTipoOperacion());
-        
+
         image = new Image("fxml/img/" + listaFotos.next().getUrl());
         img.setImage(image);
-        
-                
+
     }
+
     public void siguienteFoto() {
-        if(listaFotos.hasNext()){
+        if (listaFotos.hasNext()) {
             image = new Image("fxml/img/" + listaFotos.next().getUrl());
             img.setImage(image);
         }
     }
+
     public void anteriorFoto() {
-        if(listaFotos.hasPrevious()){
+        if (listaFotos.hasPrevious()) {
             image = new Image("fxml/img/" + listaFotos.previous().getUrl());
             img.setImage(image);
         }
     }
-    
+
     @FXML
     private void salir() {
         Stage principal = (Stage) btnSalir.getScene().getWindow();
-            principal.close();
+        principal.close();
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }    
-    
+
+    }
+
 }

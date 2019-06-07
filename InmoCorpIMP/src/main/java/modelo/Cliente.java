@@ -10,6 +10,7 @@ package modelo;
  * @author Vik-t
  */
 public class Cliente {
+
     private int idcliente;
     private String nombre;
     private String paterno;
@@ -23,8 +24,8 @@ public class Cliente {
     private int idacceso;
     private String correo;
 
-    public Cliente(int idcliente, String nombre, String paterno, String materno, 
-            String telefono, String calle, String colonia, String codigopostal, 
+    public Cliente(int idcliente, String nombre, String paterno, String materno,
+            String telefono, String calle, String colonia, String codigopostal,
             String rfc, String tipo, int idacceso, String correo) {
         this.idcliente = idcliente;
         this.nombre = nombre;
@@ -138,9 +139,9 @@ public class Cliente {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    
-    @Override 
-    public String toString(){
+
+    @Override
+    public String toString() {
         return nombre + " " + paterno + " " + materno;
     }
 }

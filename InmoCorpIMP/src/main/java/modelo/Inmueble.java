@@ -10,6 +10,7 @@ package modelo;
  * @author Vik-t
  */
 public class Inmueble {
+
     private int idinmuble;
     private String codigo;
     private String direccion;
@@ -22,15 +23,15 @@ public class Inmueble {
     private Cliente cliente = new Cliente();
     private String tipoInmuble;
     private String ciudad;
-    
+
     //Se van a eliminar estos atributos
     private int idtipoinmueble;
     private int idciudad;
     private int idcliente;
 
-    public Inmueble(int idinmuble, String codigo, String direccion, 
-            boolean disponible, String notas, String colonia, String tipoOperacion, 
-            float precioventa, float preciorenta, Cliente cliente, String tipoInmuble, 
+    public Inmueble(int idinmuble, String codigo, String direccion,
+            boolean disponible, String notas, String colonia, String tipoOperacion,
+            float precioventa, float preciorenta, Cliente cliente, String tipoInmuble,
             String ciudad, int idtipoinmueble, int idciudad, int idcliente) {
         this.idinmuble = idinmuble;
         this.codigo = codigo;
@@ -49,10 +50,8 @@ public class Inmueble {
         this.idcliente = idcliente;
     }
 
-    
-
     public Inmueble() {
-        
+
     }
 
     public int getIdinmuble() {
@@ -70,7 +69,6 @@ public class Inmueble {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-    
 
     public String getDireccion() {
         return direccion;
@@ -115,7 +113,6 @@ public class Inmueble {
     public void setTipoOperacion(String tipoOperacion) {
         this.tipoOperacion = tipoOperacion;
     }
-    
 
     public void setPrecioventa(float precioventa) {
         this.precioventa = precioventa;
@@ -152,15 +149,8 @@ public class Inmueble {
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
-    
-    
-    
-    //Hacia bajo se van a eliminar 
-    
-    
-    
-    
 
+    //Hacia bajo se van a eliminar 
     public int getIdtipoinmueble() {
         return idtipoinmueble;
     }
@@ -184,6 +174,5 @@ public class Inmueble {
     public void setIdcliente(int idciente) {
         this.idcliente = idciente;
     }
-    
-    
+
 }

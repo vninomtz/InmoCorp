@@ -10,6 +10,7 @@ package modelo;
  * @author Vik-t
  */
 public class Foto {
+
     private int idfoto;
     private String url;
     private int idinmueble;
@@ -46,6 +47,5 @@ public class Foto {
     public void setIdinmueble(int idinmueble) {
         this.idinmueble = idinmueble;
     }
-    
-    
+
 }

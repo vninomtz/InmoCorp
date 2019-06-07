@@ -28,7 +28,7 @@
                 <JFXTextField fx:id="txtDireccionInmu" labelFloat="true" layoutX="175.0" layoutY="94.0" promptText="Dirección" />
                 <JFXTextField fx:id="txtPrecioInmu" labelFloat="true" layoutX="14.0" layoutY="185.0" promptText="Precio de Venta" />
                 <JFXTextArea fx:id="txtDescripcionInmu" labelFloat="true" layoutX="163.0" layoutY="140.0" prefHeight="70.0" prefWidth="315.0" promptText="Descripción" />
-            <JFXTextField fx:id="txtTipoInmu" labelFloat="true" layoutX="337.0" layoutY="94.0" promptText="Tipo" />
+                <JFXTextField fx:id="txtTipoInmu" labelFloat="true" layoutX="337.0" layoutY="94.0" promptText="Tipo" />
             </children>
         </AnchorPane>
         <AnchorPane layoutX="518.0" layoutY="81.0" prefHeight="230.0" prefWidth="281.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 10px;">
@@ -54,39 +54,39 @@
             
         </JFXButton>
         <JFXButton fx:id="btnSalir" layoutX="735.0" layoutY="518.0" onAction="#salir" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: #009688;" text="Salir" />
-      <MenuBar layoutX="14.0" layoutY="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <menus>
-            <Menu mnemonicParsing="false" text="Ver">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#ventanaPrincipal" text="Inmuebles" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Modificar">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Inmuebles" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Agregar">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#ventanaVenta" text="Ventas" />
-                  <MenuItem mnemonicParsing="false" onAction="#ventanaRenta" text="Rentas" />
-               </items>
-            </Menu>
-         </menus>
-      </MenuBar>
-      <AnchorPane layoutX="518.0" layoutY="319.0" prefHeight="174.0" prefWidth="281.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 10px;">
-         <children>
-            <Label layoutX="14.0" layoutY="6.0" text="Datos del Comprador" />
-            <JFXTextField fx:id="txtNombreCom" labelFloat="true" layoutX="24.0" layoutY="34.0" prefHeight="25.0" prefWidth="227.0" promptText="Nombre" />
-            <JFXTextField fx:id="txtCorreoCom" labelFloat="true" layoutX="24.0" layoutY="81.0" prefHeight="25.0" prefWidth="227.0" promptText="Correo" />
-            <JFXTextField fx:id="txtTelefonoCom" labelFloat="true" layoutX="24.0" layoutY="126.0" promptText="Teléfono" />
-            <JFXButton fx:id="btnBuscarCom" layoutX="188.0" layoutY="137.0" onAction="#ventanaComprador" prefHeight="17.0" prefWidth="82.0" style="-fx-background-color: #009688;" text="   Buscar" />
-            <ImageView fitHeight="16.0" fitWidth="21.0" layoutX="196.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/search.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
+        <MenuBar layoutX="14.0" layoutY="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="Ver">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#ventanaPrincipal" text="Inmuebles" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Modificar">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Inmuebles" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Agregar">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#ventanaVenta" text="Ventas" />
+                        <MenuItem mnemonicParsing="false" onAction="#ventanaRenta" text="Rentas" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane layoutX="518.0" layoutY="319.0" prefHeight="174.0" prefWidth="281.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 10px;">
+            <children>
+                <Label layoutX="14.0" layoutY="6.0" text="Datos del Comprador" />
+                <JFXTextField fx:id="txtNombreCom" labelFloat="true" layoutX="24.0" layoutY="34.0" prefHeight="25.0" prefWidth="227.0" promptText="Nombre" />
+                <JFXTextField fx:id="txtCorreoCom" labelFloat="true" layoutX="24.0" layoutY="81.0" prefHeight="25.0" prefWidth="227.0" promptText="Correo" />
+                <JFXTextField fx:id="txtTelefonoCom" labelFloat="true" layoutX="24.0" layoutY="126.0" promptText="Teléfono" />
+                <JFXButton fx:id="btnBuscarCom" layoutX="188.0" layoutY="137.0" onAction="#ventanaComprador" prefHeight="17.0" prefWidth="82.0" style="-fx-background-color: #009688;" text="   Buscar" />
+                <ImageView fitHeight="16.0" fitWidth="21.0" layoutX="196.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@img/search.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
     </children>
 </AnchorPane>

@@ -44,7 +44,7 @@ public class SeleccionarClienteController implements Initializable {
     private JFXButton btSeleccionar;
     @FXML
     ObservableList<Cliente> clientest;
-    
+
     RegistrarVentaController controllerVenta;
     RegistrarRentaController controllerRenta;
     private Cliente comprador;
@@ -56,41 +56,40 @@ public class SeleccionarClienteController implements Initializable {
     public void setComprador(Cliente comprador) {
         this.comprador = comprador;
     }
-    
-    
-    public void setController(RegistrarVentaController controller){
-       this.controllerVenta = controller;
+
+    public void setController(RegistrarVentaController controller) {
+        this.controllerVenta = controller;
     }
-    public void setController(RegistrarRentaController controller){
-       this.controllerRenta = controller;
+
+    public void setController(RegistrarRentaController controller) {
+        this.controllerRenta = controller;
     }
+
     @FXML
     private void salir() {
         Stage principal = (Stage) btSalir.getScene().getWindow();
-            principal.close();
+        principal.close();
     }
-    
+
     @FXML
-    private void botonSeleccionar(){
+    private void botonSeleccionar() {
         comprador = obtenerClienteSeleccionado();
         System.out.println(comprador);
-        if(comprador != null){
-            
-            if(controllerRenta != null){
+        if (comprador != null) {
+
+            if (controllerRenta != null) {
                 controllerRenta.setComprador(comprador);
-            }else{
+            } else {
                 controllerVenta.setComprador(comprador);
             }
-            
-            
+
             Stage principal = (Stage) btSeleccionar.getScene().getWindow();
             principal.close();
-        }else {
+        } else {
             System.out.println("No se selecciono ningun cliente");
         }
     }
-    
-    
+
     public Cliente obtenerClienteSeleccionado() {
         if (tablaClientes != null) {
             Cliente cliente = tablaClientes.getSelectionModel().getSelectedItem();
@@ -99,7 +98,7 @@ public class SeleccionarClienteController implements Initializable {
             return null;
         }
     }
-    
+
     @FXML
     private void cargarClientes() {
         ClienteImp daoCliente = new ClienteImp();
@@ -124,7 +123,7 @@ public class SeleccionarClienteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarTablaClientes();
-        
+
     }
 
 }

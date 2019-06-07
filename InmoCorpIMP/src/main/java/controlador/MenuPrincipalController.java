@@ -130,7 +130,7 @@ public class MenuPrincipalController implements Initializable {
             System.out.println("Error al mostrar ventana Rentas: " + ex);
         }
     }
-    
+
     public Inmueble buscarInmueble(String codigo) {
         Inmueble inmueble = null;
         InmuebleImp inmuebleimp = new InmuebleImp();
@@ -145,24 +145,24 @@ public class MenuPrincipalController implements Initializable {
 
         return inmueble;
     }
-    
+
     @FXML
-    private void btBuscarInmueble(){
-        if(txtBuscarInmu.getText().equals("")){
+    private void btBuscarInmueble() {
+        if (txtBuscarInmu.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Error con la busqueda");
             alert.setHeaderText("Por favor ingrese un codigo de inmueble");
             alert.showAndWait();
-        }else if(buscarInmueble(txtBuscarInmu.getText()) == null){
+        } else if (buscarInmueble(txtBuscarInmu.getText()) == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Error con la busqueda");
             alert.setHeaderText("Inmueble no existente");
             alert.showAndWait();
-        }else{
-        Inmueble inmu = buscarInmueble(txtBuscarInmu.getText());
+        } else {
+            Inmueble inmu = buscarInmueble(txtBuscarInmu.getText());
 
-        ObservableList<Inmueble> observableListInmu = FXCollections.observableArrayList(inmu);
-        tablaInmueble.setItems(observableListInmu);
+            ObservableList<Inmueble> observableListInmu = FXCollections.observableArrayList(inmu);
+            tablaInmueble.setItems(observableListInmu);
         }
     }
 
@@ -175,7 +175,7 @@ public class MenuPrincipalController implements Initializable {
             alert.setHeaderText("Por favor seleccione un tipo de inmueble");
             alert.showAndWait();
             return false;
-        }else if( tipoOperacion == null ){
+        } else if (tipoOperacion == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Error con la busqueda");
             alert.setHeaderText("Por favor seleccione un tipo de operación");
@@ -189,14 +189,14 @@ public class MenuPrincipalController implements Initializable {
 
     @FXML
     private void filitrarInmuebles() {
-        if(validarFiltrado()){
+        if (validarFiltrado()) {
             InmuebleImp inmuebleimp = new InmuebleImp();
-        listaInmueble = inmuebleimp.getInmueblesFilitrado(cbTipoInmu.getValue().getTipo(), cbTipoOperacion.getValue());
+            listaInmueble = inmuebleimp.getInmueblesFilitrado(cbTipoInmu.getValue().getTipo(), cbTipoOperacion.getValue());
 
-        ObservableList<Inmueble> observableListInmu = FXCollections.observableArrayList(listaInmueble);
-        tablaInmueble.setItems(observableListInmu);
+            ObservableList<Inmueble> observableListInmu = FXCollections.observableArrayList(listaInmueble);
+            tablaInmueble.setItems(observableListInmu);
         }
-        
+
     }
 
     @FXML

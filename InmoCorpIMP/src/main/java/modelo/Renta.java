@@ -12,6 +12,7 @@ import java.util.Date;
  * @author Vik-t
  */
 public class Renta {
+
     private int idrenta;
     private String fechainicio;
     private String fechafin;
@@ -19,9 +20,9 @@ public class Renta {
     private double monto;
     private int idcliente;
     private int idinmueble;
-    
+
     public Renta() {
-        
+
     }
 
     public Renta(int idrenta, String fechainicio, String fechafin, double deposito, double monto, int idcliente, int idinmueble) {
@@ -89,5 +90,5 @@ public class Renta {
     public void setIdinmueble(int idinmueble) {
         this.idinmueble = idinmueble;
     }
-    
+
 }

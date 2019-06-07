@@ -132,6 +132,7 @@ public class RegistrarVentaController implements Initializable {
     public void setComprador(Cliente comprador) {
         this.comprador = comprador;
     }
+
     @FXML
     private void salir() {
         exit();

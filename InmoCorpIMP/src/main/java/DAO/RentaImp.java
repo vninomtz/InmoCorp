@@ -14,7 +14,7 @@ import modelo.Renta;
  *
  * @author Vik-t
  */
-public class RentaImp implements IRegistrarRenta{
+public class RentaImp implements IRegistrarRenta {
 
     @Override
     public boolean guardarRenta(Renta renta) {
@@ -29,7 +29,7 @@ public class RentaImp implements IRegistrarRenta{
         try {
             Statement statement = conexionBD.createStatement();
             int rs = statement.executeUpdate(sentencia);
-            if(rs == 1 || rs ==2  || rs == 0){
+            if (rs == 1 || rs == 2 || rs == 0) {
                 return true;
             }
         } catch (SQLException ex) {
@@ -43,5 +43,5 @@ public class RentaImp implements IRegistrarRenta{
         }
         return false;
     }
-    
+
 }

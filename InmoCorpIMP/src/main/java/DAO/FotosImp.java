@@ -18,17 +18,17 @@ import modelo.Foto;
  *
  * @author Vik-t
  */
-public class FotosImp implements IFotos{
+public class FotosImp implements IFotos {
 
     @Override
     public List<Foto> getFotos(int idinmueble) {
-         List<Foto> listaFotos = new ArrayList();
+        List<Foto> listaFotos = new ArrayList();
         Connection conexionBD = new ConexionBD().getConexionBD();
-        String sQuery = "SELECT * FROM fotos WHERE idinmueble =" +idinmueble + ";";
-      
+        String sQuery = "SELECT * FROM fotos WHERE idinmueble =" + idinmueble + ";";
+
         System.out.println(sQuery);
         try {
-            Statement statement = conexionBD.createStatement();  
+            Statement statement = conexionBD.createStatement();
             ResultSet rs = statement.executeQuery(sQuery);
             while (rs != null && rs.next()) {
                 Foto foto = new Foto();
@@ -53,6 +53,5 @@ public class FotosImp implements IFotos{
         }
         return listaFotos;
     }
-    
-    
+
 }

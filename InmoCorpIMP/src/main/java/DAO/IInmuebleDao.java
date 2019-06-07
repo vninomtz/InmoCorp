@@ -13,8 +13,11 @@ import modelo.Inmueble;
  * @author Vik-t
  */
 public interface IInmuebleDao {
+
     public List<Inmueble> getInmuebles();
+
     public boolean updateDisponibilidad(int idinmueble, boolean disponible);
+
     public List<Inmueble> getInmueblesFilitrado(String tipo_inmu, String tipo_operacion);
-    
+
 }

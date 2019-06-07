@@ -6,16 +6,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.SeleccionarClienteController">
-   <children>
-      <TableView fx:id="tablaClientes" layoutX="34.0" layoutY="59.0" onSort="#cargarClientes" prefHeight="317.0" prefWidth="677.0">
-        <columns>
-          <TableColumn fx:id="tcNombre" prefWidth="183.0" text="Nombre" />
-          <TableColumn fx:id="tcDireccion" prefWidth="175.0" text="Direccion" />
-            <TableColumn fx:id="tcTelefono" prefWidth="157.0" text="Telefono" />
-            <TableColumn fx:id="tcCorreo" prefWidth="160.0" text="Correo" />
-        </columns>
-      </TableView>
-      <JFXButton fx:id="btSalir" layoutX="34.0" layoutY="407.0" onAction="#salir" prefHeight="27.0" prefWidth="97.0" style="-fx-background-color: #009688 #009688;" text="Salir" />
-      <JFXButton fx:id="btSeleccionar" layoutX="167.0" layoutY="407.0" onAction="#botonSeleccionar" prefHeight="27.0" prefWidth="97.0" style="-fx-background-color: #009688 #009688;" text="Seleccionar" />
-   </children>
+    <children>
+        <TableView fx:id="tablaClientes" layoutX="34.0" layoutY="59.0" onSort="#cargarClientes" prefHeight="317.0" prefWidth="677.0">
+            <columns>
+                <TableColumn fx:id="tcNombre" prefWidth="183.0" text="Nombre" />
+                <TableColumn fx:id="tcDireccion" prefWidth="175.0" text="Direccion" />
+                <TableColumn fx:id="tcTelefono" prefWidth="157.0" text="Telefono" />
+                <TableColumn fx:id="tcCorreo" prefWidth="160.0" text="Correo" />
+            </columns>
+        </TableView>
+        <JFXButton fx:id="btSalir" layoutX="34.0" layoutY="407.0" onAction="#salir" prefHeight="27.0" prefWidth="97.0" style="-fx-background-color: #009688 #009688;" text="Salir" />
+        <JFXButton fx:id="btSeleccionar" layoutX="167.0" layoutY="407.0" onAction="#botonSeleccionar" prefHeight="27.0" prefWidth="97.0" style="-fx-background-color: #009688 #009688;" text="Seleccionar" />
+    </children>
 </AnchorPane>

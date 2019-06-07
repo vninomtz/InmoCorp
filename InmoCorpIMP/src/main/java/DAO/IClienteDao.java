@@ -14,9 +14,14 @@ import modelo.Cliente;
  * @author Vik-t
  */
 public interface IClienteDao {
+
     public Cliente getCliente(int idcliente);
+
     public List<Cliente> getClientes();
+
     public boolean nuevoCliente(Cliente cliente);
+
     public boolean eliminarCliente(Cliente cliente);
+
     boolean editarCliente(Cliente cliente);
 }

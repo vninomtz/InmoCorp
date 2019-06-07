@@ -13,5 +13,6 @@ import modelo.Foto;
  * @author Vik-t
  */
 public interface IFotos {
+
     public List<Foto> getFotos(int idinmueble);
 }

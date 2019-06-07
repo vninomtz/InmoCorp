@@ -12,5 +12,6 @@ import modelo.Renta;
  * @author Vik-t
  */
 public interface IRegistrarRenta {
-    public boolean guardarRenta (Renta renta);
+
+    public boolean guardarRenta(Renta renta);
 }

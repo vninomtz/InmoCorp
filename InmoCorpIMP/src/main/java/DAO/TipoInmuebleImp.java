@@ -17,7 +17,7 @@ import modelo.TipoInmueble;
  *
  * @author Vik-t
  */
-public class TipoInmuebleImp implements ITipoInmuebleDao{
+public class TipoInmuebleImp implements ITipoInmuebleDao {
 
     @Override
     public List<TipoInmueble> getTipoInmuebles() {
@@ -42,9 +42,9 @@ public class TipoInmuebleImp implements ITipoInmuebleDao{
             } catch (SQLException ex) {
                 System.out.println("Error al cerrar la conexion:");
             }*/
-           
+
         }
         return listaTipoInmuebles;
     }
-    
+
 }

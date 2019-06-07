@@ -17,13 +17,13 @@ import modelo.Cliente;
  *
  * @author Vik-t
  */
-public class ClienteImp implements IClienteDao{
+public class ClienteImp implements IClienteDao {
 
     @Override
     public Cliente getCliente(int idcliente) {
         Cliente cliente = new Cliente();
         Connection conexionBD = new ConexionBD().getConexionBD();
-        String sQuery = "SELECT * from cliente where idcliente=" + idcliente +";";
+        String sQuery = "SELECT * from cliente where idcliente=" + idcliente + ";";
         System.out.println(sQuery);
         try {
             Statement statement = conexionBD.createStatement();
@@ -32,7 +32,7 @@ public class ClienteImp implements IClienteDao{
                 cliente.setIdcliente(rs.getInt("idcliente"));
                 cliente.setNombre(rs.getString("nombre"));
                 cliente.setPaterno(rs.getString("paterno"));
-                cliente.setMaterno(rs.getString("materno"));            
+                cliente.setMaterno(rs.getString("materno"));
                 cliente.setTelefono(rs.getString("telefono"));
                 cliente.setCalle(rs.getString("calle"));
                 cliente.setColonia(rs.getString("colonia"));
@@ -42,7 +42,7 @@ public class ClienteImp implements IClienteDao{
                 cliente.setIdacceso(rs.getInt("idacceso"));
                 cliente.setCorreo(rs.getString("correo"));
             }
-            
+
         } catch (SQLException ex) {
             System.out.println("Error en la creacion de el Statement: " + ex.getMessage());
         } finally {
@@ -57,7 +57,7 @@ public class ClienteImp implements IClienteDao{
 
     @Override
     public List<Cliente> getClientes() {
-       List<Cliente> listaInmuebles = new ArrayList();
+        List<Cliente> listaInmuebles = new ArrayList();
         Connection conexionBD = new ConexionBD().getConexionBD();
         String sQuery = "SELECT * from cliente where tipo = 'Comprador'";
         try {
@@ -77,7 +77,7 @@ public class ClienteImp implements IClienteDao{
                 cliente.setTipo(rs.getString("tipo"));
                 cliente.setIdcliente(rs.getInt("idacceso"));
                 cliente.setCorreo(rs.getString("correo"));
-                
+
                 listaInmuebles.add(cliente);
                 System.out.println(cliente);
             }
@@ -110,8 +110,5 @@ public class ClienteImp implements IClienteDao{
         return false;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 
-    
-    
 }

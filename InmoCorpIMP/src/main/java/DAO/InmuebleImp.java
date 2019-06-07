@@ -18,27 +18,27 @@ import modelo.Inmueble;
  *
  * @author Vik-t
  */
-public class InmuebleImp implements IInmuebleDao{
+public class InmuebleImp implements IInmuebleDao {
 
     @Override
     public List<Inmueble> getInmuebles() {
         List<Inmueble> listaInmuebles = new ArrayList();
         Connection conexionBD = new ConexionBD().getConexionBD();
         String sQuery = "SELECT * from inmueble_detalles;";
-      
+
         System.out.println(sQuery);
         try {
             Statement statement = conexionBD.createStatement();
-           
+
             ResultSet rs = statement.executeQuery(sQuery);
             while (rs != null && rs.next()) {
                 Inmueble inmu = new Inmueble();
-                
+
                 inmu.setIdinmuble(rs.getInt("idinmueble"));
                 inmu.setIdcliente(rs.getInt("idcliente"));
                 inmu.setIdtipoinmueble(rs.getInt("idtipo_inmueble"));
                 inmu.setIdciudad(rs.getInt("idciudad"));
-                
+
                 inmu.setCodigo(rs.getString("codigo_inmueble"));
                 inmu.setDireccion(rs.getString("direccion_inmueble"));
                 inmu.setDisponible(rs.getBoolean("disponible"));
@@ -59,8 +59,8 @@ public class InmuebleImp implements IInmuebleDao{
                 inmu.getCliente().setRfc(rs.getString("rfc_cliente"));
                 inmu.getCliente().setTipo(rs.getString("tipo_cliente"));
                 inmu.getCliente().setIdacceso(rs.getInt("idacceso_cliente"));
-                inmu.getCliente().setCorreo(rs.getString("correo_cliente"));      
-                
+                inmu.getCliente().setCorreo(rs.getString("correo_cliente"));
+
                 //Se van a borrar estas consultas
                 listaInmuebles.add(inmu);
             }
@@ -83,25 +83,25 @@ public class InmuebleImp implements IInmuebleDao{
 
     @Override
     public boolean updateDisponibilidad(int idinmueble, boolean disponible) {
-        String sQuery = null; 
-        if(disponible){
-             sQuery = "UPDATE inmueble SET disponible = 1" + " WHERE idinmueble = " 
-                     + idinmueble + ";";           
-        }else {
-            sQuery = "UPDATE inmueble SET disponible = 0" + " WHERE idinmueble = " 
-                     + idinmueble + ";";   
+        String sQuery = null;
+        if (disponible) {
+            sQuery = "UPDATE inmueble SET disponible = 1" + " WHERE idinmueble = "
+                    + idinmueble + ";";
+        } else {
+            sQuery = "UPDATE inmueble SET disponible = 0" + " WHERE idinmueble = "
+                    + idinmueble + ";";
         }
         System.out.println(sQuery);
         Connection conexionBD = new ConexionBD().getConexionBD();
-         try {
+        try {
             Statement statement = conexionBD.createStatement();
             int rs = statement.executeUpdate(sQuery);
-            if(rs == 1 || rs ==2  || rs == 0){
-                return true; 
+            if (rs == 1 || rs == 2 || rs == 0) {
+                return true;
             }
         } catch (SQLException ex) {
-           System.out.println("Error en la creacion de el Statement: " + ex);
-           return false;
+            System.out.println("Error en la creacion de el Statement: " + ex);
+            return false;
         } finally {
             /*try {
                 conexionBD.close();
@@ -112,25 +112,24 @@ public class InmuebleImp implements IInmuebleDao{
         return false;
     }
 
-    
     @Override
     public List<Inmueble> getInmueblesFilitrado(String tipo_inmu, String tipo_operacion) {
-       List<Inmueble> listaInmuebles = new ArrayList();
+        List<Inmueble> listaInmuebles = new ArrayList();
         Connection conexionBD = new ConexionBD().getConexionBD();
         String sQuery;
-        
-        if(tipo_inmu.equals("Todos") && tipo_operacion.equals("Todas")){
+
+        if (tipo_inmu.equals("Todos") && tipo_operacion.equals("Todas")) {
             sQuery = "SELECT * from inmueble_detalles;";
-            
-        }else if(tipo_inmu.equals("Todos") && !tipo_operacion.equals("Todas")){
+
+        } else if (tipo_inmu.equals("Todos") && !tipo_operacion.equals("Todas")) {
             sQuery = "SELECT * from inmueble_detalles where tipo_operacion = '" + tipo_operacion + "'";
-            
-        }else if(!tipo_inmu.equals("Todos") && tipo_operacion.equals("Todas")){
-            
-             sQuery = "SELECT * from inmueble_detalles where tipo_inmueble = '" + tipo_inmu + "'";
-        }else{
+
+        } else if (!tipo_inmu.equals("Todos") && tipo_operacion.equals("Todas")) {
+
+            sQuery = "SELECT * from inmueble_detalles where tipo_inmueble = '" + tipo_inmu + "'";
+        } else {
             sQuery = "SELECT * from inmueble_detalles where tipo_operacion = '" + tipo_operacion + "'"
-                + " and tipo_inmueble = '" + tipo_inmu + "'";
+                    + " and tipo_inmueble = '" + tipo_inmu + "'";
         }
 
         System.out.println(sQuery);
@@ -188,5 +187,5 @@ public class InmuebleImp implements IInmuebleDao{
         }
         return listaInmuebles;
     }
-    
+
 }

@@ -14,19 +14,18 @@ import modelo.Venta;
  *
  * @author alanglezh
  */
-public class VentaImp implements IVentaDao{
+public class VentaImp implements IVentaDao {
 
-    
     @Override
     public boolean guardarVenta(Venta venta) {
-        String query = "INSERT INTO venta(fecha_venta,monto,idcliente,idinmueble) VALUES ('" + venta.getFecha_venta()+ "','"
-                + venta.getMonto() + "','" + venta.getIdcliente()+ "','" + venta.getIdinmueble()+ "');";
+        String query = "INSERT INTO venta(fecha_venta,monto,idcliente,idinmueble) VALUES ('" + venta.getFecha_venta() + "','"
+                + venta.getMonto() + "','" + venta.getIdcliente() + "','" + venta.getIdinmueble() + "');";
         System.out.println(query);
         Connection conexionBD = new ConexionBD().getConexionBD();
         try {
             Statement statement = conexionBD.createStatement();
             int rs = statement.executeUpdate(query);
-            if(rs == 1 || rs ==2  || rs == 0){
+            if (rs == 1 || rs == 2 || rs == 0) {
                 return true;
             }
         } catch (SQLException ex) {
@@ -40,5 +39,5 @@ public class VentaImp implements IVentaDao{
         }
         return false;
     }
-    
+
 }
