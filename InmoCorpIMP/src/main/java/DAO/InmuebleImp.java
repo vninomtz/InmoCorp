@@ -62,7 +62,10 @@ public class InmuebleImp implements IInmuebleDao {
                 inmu.getCliente().setCorreo(rs.getString("correo_cliente"));
 
                 //Se van a borrar estas consultas
-                listaInmuebles.add(inmu);
+                if(inmu.isDisponible()){
+                    listaInmuebles.add(inmu);
+                }
+                
             }
         } catch (SQLException ex) {
             System.out.println("Error en la creacion de el Statement: " + ex.getMessage());
@@ -169,7 +172,9 @@ public class InmuebleImp implements IInmuebleDao {
                 System.out.println(inmu.getCodigo());
 
                 //Se van a borrar estas consultas
-                listaInmuebles.add(inmu);
+                if(inmu.isDisponible()){
+                    listaInmuebles.add(inmu);
+                }
             }
         } catch (SQLException ex) {
             System.out.println("Error en la creacion de el Statement: " + ex.getMessage());

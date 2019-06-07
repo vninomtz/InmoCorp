@@ -85,6 +85,7 @@ public class MenuPrincipalController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Registrar Ventas");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
             Stage principal = (Stage) btnSalir.getScene().getWindow();
             principal.close();
@@ -104,6 +105,7 @@ public class MenuPrincipalController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("InmoCorp");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
             Stage principal = (Stage) btnSalir.getScene().getWindow();
             principal.close();
@@ -123,6 +125,7 @@ public class MenuPrincipalController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Registrar Rentas");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
             Stage principal = (Stage) btnSalir.getScene().getWindow();
             principal.close();
@@ -216,6 +219,7 @@ public class MenuPrincipalController implements Initializable {
                 stage.setScene(scene);
                 stage.alwaysOnTopProperty();
                 stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setResizable(false);
                 stage.show();
             } catch (IOException ex) {
                 System.out.println("Error al mostrar ventana Rentas: " + ex);

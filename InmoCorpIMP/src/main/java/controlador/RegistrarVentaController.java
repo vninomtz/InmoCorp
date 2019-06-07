@@ -122,6 +122,7 @@ public class RegistrarVentaController implements Initializable {
                     txtTelefonoCom.setText(comprador.getTelefono());
                 }
             });
+            stage.setResizable(false);
             stage.show();
         } catch (IOException ex) {
             System.out.println("Error al mostrar ventana Ventas: " + ex.getMessage());
@@ -148,6 +149,7 @@ public class RegistrarVentaController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Registrar Ventas");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
             Stage principal = (Stage) btnSalir.getScene().getWindow();
             principal.close();
@@ -207,6 +209,7 @@ public class RegistrarVentaController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("InmoCorp");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
             Stage principal = (Stage) btnSalir.getScene().getWindow();
             principal.close();
@@ -225,6 +228,7 @@ public class RegistrarVentaController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Registrar Rentas");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
             Stage principal = (Stage) btnSalir.getScene().getWindow();
             principal.close();
