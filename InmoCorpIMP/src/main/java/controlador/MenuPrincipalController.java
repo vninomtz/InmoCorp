@@ -44,21 +44,36 @@ import modelo.TipoInmueble;
 public class MenuPrincipalController implements Initializable {
 
     List<Inmueble> listaInmueble = new ArrayList();
-    @FXML private JFXButton btnSalir;
-    @FXML private JFXButton btnVerDetalles;
-    @FXML private JFXButton btnConsultar;
-    @FXML private JFXTextField txtBuscarInmu; 
-    @FXML private JFXButton btnBuscarInmu;
-    @FXML private JFXComboBox<TipoInmueble> cbTipoInmu;
-    @FXML private JFXComboBox<String> cbTipoOperacion;
-    @FXML private TableColumn<Inmueble, String> colTipoOperacion;
-    @FXML private TableColumn<Inmueble, String> colTipoInmu;
-    @FXML private TableColumn<Inmueble, String> colDescripcion;
-    @FXML private TableColumn<Inmueble, Integer> colCiudad;
-    @FXML private TableColumn<Inmueble, String> colColonia;
-    @FXML private TableColumn<Inmueble,Double> colPrecioRenta;
-    @FXML private TableColumn<Inmueble,Double> colPrecioVenta;
-    @FXML private TableView<Inmueble> tablaInmueble;
+    @FXML
+    private JFXButton btnSalir;
+    @FXML
+    private JFXButton btnVerDetalles;
+    @FXML
+    private JFXButton btnConsultar;
+    @FXML
+    private JFXTextField txtBuscarInmu;
+    @FXML
+    private JFXButton btnBuscarInmu;
+    @FXML
+    private JFXComboBox<TipoInmueble> cbTipoInmu;
+    @FXML
+    private JFXComboBox<String> cbTipoOperacion;
+    @FXML
+    private TableColumn<Inmueble, String> colTipoOperacion;
+    @FXML
+    private TableColumn<Inmueble, String> colTipoInmu;
+    @FXML
+    private TableColumn<Inmueble, String> colDescripcion;
+    @FXML
+    private TableColumn<Inmueble, Integer> colCiudad;
+    @FXML
+    private TableColumn<Inmueble, String> colColonia;
+    @FXML
+    private TableColumn<Inmueble, Double> colPrecioRenta;
+    @FXML
+    private TableColumn<Inmueble, Double> colPrecioVenta;
+    @FXML
+    private TableView<Inmueble> tablaInmueble;
 
     @FXML
     private void ventanaVenta() {
@@ -73,11 +88,12 @@ public class MenuPrincipalController implements Initializable {
             stage.show();
             Stage principal = (Stage) btnSalir.getScene().getWindow();
             principal.close();
-            
+
         } catch (IOException ex) {
             System.out.println("Error al mostrar ventana Ventas: " + ex);
         }
     }
+
     @FXML
     private void ventanaPrincipal() {
         try {
@@ -91,11 +107,12 @@ public class MenuPrincipalController implements Initializable {
             stage.show();
             Stage principal = (Stage) btnSalir.getScene().getWindow();
             principal.close();
-            
+
         } catch (IOException ex) {
             System.out.println("Error al mostrar ventana principal: " + ex.getMessage());
         }
     }
+
     @FXML
     private void ventanaRenta() {
         try {
@@ -113,17 +130,86 @@ public class MenuPrincipalController implements Initializable {
             System.out.println("Error al mostrar ventana Rentas: " + ex);
         }
     }
+    
+    public Inmueble buscarInmueble(String codigo) {
+        Inmueble inmueble = null;
+        InmuebleImp inmuebleimp = new InmuebleImp();
+        List<Inmueble> listainmuebles = inmuebleimp.getInmuebles();
+        for (Inmueble inmu : listainmuebles) {
+            if (inmu.getCodigo().equals(codigo)) {
+                inmueble = inmu;
+
+                break;
+            }
+        }
+
+        return inmueble;
+    }
+    
+    @FXML
+    private void btBuscarInmueble(){
+        if(txtBuscarInmu.getText().equals("")){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con la busqueda");
+            alert.setHeaderText("Por favor ingrese un codigo de inmueble");
+            alert.showAndWait();
+        }else if(buscarInmueble(txtBuscarInmu.getText()) == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con la busqueda");
+            alert.setHeaderText("Inmueble no existente");
+            alert.showAndWait();
+        }else{
+        Inmueble inmu = buscarInmueble(txtBuscarInmu.getText());
+
+        ObservableList<Inmueble> observableListInmu = FXCollections.observableArrayList(inmu);
+        tablaInmueble.setItems(observableListInmu);
+        }
+    }
+
+    private boolean validarFiltrado() {
+        String tipoOperacion = cbTipoOperacion.getValue();
+
+        if (cbTipoInmu.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con la busqueda");
+            alert.setHeaderText("Por favor seleccione un tipo de inmueble");
+            alert.showAndWait();
+            return false;
+        }else if( tipoOperacion == null ){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con la busqueda");
+            alert.setHeaderText("Por favor seleccione un tipo de operación");
+            alert.showAndWait();
+            return false;
+        }
+
+        return true;
+
+    }
+
+    @FXML
+    private void filitrarInmuebles() {
+        if(validarFiltrado()){
+            InmuebleImp inmuebleimp = new InmuebleImp();
+        listaInmueble = inmuebleimp.getInmueblesFilitrado(cbTipoInmu.getValue().getTipo(), cbTipoOperacion.getValue());
+
+        ObservableList<Inmueble> observableListInmu = FXCollections.observableArrayList(listaInmueble);
+        tablaInmueble.setItems(observableListInmu);
+        }
+        
+    }
+
     @FXML
     private void verDetalles() {
         Inmueble inmu = obtenerInmuebleSeleccionado();
-        if(inmu != null){
+        if (inmu != null) {
             try {
                 FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/InformacionDetallada.fxml"));
                 AnchorPane anchorpane = loader.load();
                 Scene scene = new Scene(anchorpane);
                 scene.getStylesheets().add("/styles/Styles.css");
                 Stage stage = new Stage();
-                InformacionDetalladaController controller = (InformacionDetalladaController)loader.getController();
+                InformacionDetalladaController controller = (InformacionDetalladaController) loader.getController();
                 controller.setController(this, inmu);
 
                 stage.setTitle("Detalle Inmueble");
@@ -136,35 +222,37 @@ public class MenuPrincipalController implements Initializable {
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Seleccionar Inmuble");
-                    alert.setHeaderText("Para ver el detalle del inmueble "
-                            + "por favor seleccione el inmuble");
-                    alert.showAndWait();
+            alert.setTitle("Seleccionar Inmuble");
+            alert.setHeaderText("Para ver el detalle del inmueble "
+                    + "por favor seleccione el inmuble");
+            alert.showAndWait();
         }
-        
+
     }
+
     @FXML
     private void salir() {
         exit();
     }
-    
+
     private void llenarCbTipoInmueble() {
         TipoInmuebleImp tipoinmuebleimp = new TipoInmuebleImp();
-        ObservableList<TipoInmueble> observablelisttipo = 
-                FXCollections.observableArrayList(tipoinmuebleimp.getTipoInmuebles());
-        cbTipoInmu.setItems(observablelisttipo);    
+        ObservableList<TipoInmueble> observablelisttipo
+                = FXCollections.observableArrayList(tipoinmuebleimp.getTipoInmuebles());
+        cbTipoInmu.setItems(observablelisttipo);
     }
-    
+
     private void llenarCbTipoOperacion() {
-        List<String> listaTipoOperacion = new ArrayList(); 
+        List<String> listaTipoOperacion = new ArrayList();
         listaTipoOperacion.add("Renta");
         listaTipoOperacion.add("Venta");
         listaTipoOperacion.add("Venta/Renta");
-        ObservableList<String> obsevableListaTipoOpe = 
-                FXCollections.observableArrayList(listaTipoOperacion);
+        listaTipoOperacion.add("Todas");
+        ObservableList<String> obsevableListaTipoOpe
+                = FXCollections.observableArrayList(listaTipoOperacion);
         cbTipoOperacion.setItems(obsevableListaTipoOpe);
     }
-    
+
     private void llenarTablaInmuebles() {
         TipoInmuebleImp tipoinmuebleimp = new TipoInmuebleImp();
         List<TipoInmueble> listaTipoCd = tipoinmuebleimp.getTipoInmuebles();
@@ -180,8 +268,8 @@ public class MenuPrincipalController implements Initializable {
         ObservableList<Inmueble> observableListInmu = FXCollections.observableArrayList(listaInmueble);
         tablaInmueble.setItems(observableListInmu);
     }
-    
-        public Inmueble obtenerInmuebleSeleccionado() {
+
+    public Inmueble obtenerInmuebleSeleccionado() {
         if (tablaInmueble != null) {
             Inmueble inmu = tablaInmueble.getSelectionModel().getSelectedItem();
             return inmu;
@@ -189,15 +277,16 @@ public class MenuPrincipalController implements Initializable {
             return null;
         }
     }
+
     private void iniciarInterfaz() {
         llenarCbTipoInmueble();
         llenarCbTipoOperacion();
         llenarTablaInmuebles();
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         iniciarInterfaz();
     }
-    
+
 }

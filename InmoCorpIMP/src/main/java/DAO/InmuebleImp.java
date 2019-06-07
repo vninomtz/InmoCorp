@@ -111,5 +111,82 @@ public class InmuebleImp implements IInmuebleDao{
         }
         return false;
     }
+
+    
+    @Override
+    public List<Inmueble> getInmueblesFilitrado(String tipo_inmu, String tipo_operacion) {
+       List<Inmueble> listaInmuebles = new ArrayList();
+        Connection conexionBD = new ConexionBD().getConexionBD();
+        String sQuery;
+        
+        if(tipo_inmu.equals("Todos") && tipo_operacion.equals("Todas")){
+            sQuery = "SELECT * from inmueble_detalles;";
+            
+        }else if(tipo_inmu.equals("Todos") && !tipo_operacion.equals("Todas")){
+            sQuery = "SELECT * from inmueble_detalles where tipo_operacion = '" + tipo_operacion + "'";
+            
+        }else if(!tipo_inmu.equals("Todos") && tipo_operacion.equals("Todas")){
+            
+             sQuery = "SELECT * from inmueble_detalles where tipo_inmueble = '" + tipo_inmu + "'";
+        }else{
+            sQuery = "SELECT * from inmueble_detalles where tipo_operacion = '" + tipo_operacion + "'"
+                + " and tipo_inmueble = '" + tipo_inmu + "'";
+        }
+
+        System.out.println(sQuery);
+        try {
+            Statement statement = conexionBD.createStatement();
+
+            ResultSet rs = statement.executeQuery(sQuery);
+            while (rs != null && rs.next()) {
+                Inmueble inmu = new Inmueble();
+
+                inmu.setIdinmuble(rs.getInt("idinmueble"));
+                inmu.setIdcliente(rs.getInt("idcliente"));
+                inmu.setIdtipoinmueble(rs.getInt("idtipo_inmueble"));
+                inmu.setIdciudad(rs.getInt("idciudad"));
+
+                inmu.setCodigo(rs.getString("codigo_inmueble"));
+                inmu.setDireccion(rs.getString("direccion_inmueble"));
+                inmu.setDisponible(rs.getBoolean("disponible"));
+                inmu.setNotas(rs.getString("notas"));
+                inmu.setColonia(rs.getString("colonia_inmueble"));
+                inmu.setTipoOperacion(rs.getString("tipo_operacion"));
+                inmu.setPrecioventa(rs.getFloat("precio_venta"));
+                inmu.setPreciorenta(rs.getFloat("precio_renta"));
+                inmu.setCiudad(rs.getString("ciudad_inmueble"));
+                inmu.setTipoInmuble(rs.getString("tipo_inmueble"));
+                inmu.getCliente().setNombre(rs.getString("nombre_cliente"));
+                inmu.getCliente().setPaterno(rs.getString("paterno_cliente"));
+                inmu.getCliente().setMaterno(rs.getString("materno_cliente"));
+                inmu.getCliente().setTelefono(rs.getString("telefono_cliente"));
+                inmu.getCliente().setCalle(rs.getString("calle_cliente"));
+                inmu.getCliente().setColonia(rs.getString("colonia_cliente"));
+                inmu.getCliente().setCodigopostal(rs.getString("codigo_postal_cliente"));
+                inmu.getCliente().setRfc(rs.getString("rfc_cliente"));
+                inmu.getCliente().setTipo(rs.getString("tipo_cliente"));
+                inmu.getCliente().setIdacceso(rs.getInt("idacceso_cliente"));
+                inmu.getCliente().setCorreo(rs.getString("correo_cliente"));
+                System.out.println(inmu.getCodigo());
+
+                //Se van a borrar estas consultas
+                listaInmuebles.add(inmu);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error en la creacion de el Statement: " + ex.getMessage());
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con BD");
+            alert.setHeaderText("Hubo un error con la conexión a la Base de Datos,"
+                    + "por favor intente más tarde");
+            alert.showAndWait();
+        } finally {
+            /*try {
+                conexionBD.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexion" + ex.getMessage());
+            }*/
+        }
+        return listaInmuebles;
+    }
     
 }
