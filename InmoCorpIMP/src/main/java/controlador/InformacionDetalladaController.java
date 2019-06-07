@@ -5,16 +5,20 @@
  */
 package controlador;
 
+import DAO.FotosImp;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
 import javafx.scene.image.Image;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import modelo.Foto;
 import modelo.Inmueble;
 
 /**
@@ -53,6 +57,9 @@ public class InformacionDetalladaController implements Initializable {
     @FXML
     private ImageView img;
     
+    private ListIterator<Foto> listaFotos;
+    Image image;
+    
     
     MenuPrincipalController menuprincipal;
     Inmueble inmu;
@@ -65,6 +72,8 @@ public class InformacionDetalladaController implements Initializable {
        }
     }
     public void iniciarInterfaz() {
+        FotosImp fotosimp = new FotosImp();
+        listaFotos = fotosimp.getFotos(inmu.getIdinmuble()).listIterator();
         txtCodigoInmu.setText(inmu.getCodigo());
         txtColoniaInmu.setText(inmu.getColonia());
         txtDireccionInmu.setText(inmu.getDireccion());
@@ -75,9 +84,22 @@ public class InformacionDetalladaController implements Initializable {
         txtPrecioRenta.setText(Double.toString(inmu.getPreciorenta()));
         txtTipoOperacion.setText(inmu.getTipoOperacion());
         
-        Image image = new Image("/fxml/img/que-es-bien-inmueble.jpg");
+        image = new Image("fxml/img/" + listaFotos.next().getUrl());
         img.setImage(image);
+        
                 
+    }
+    public void siguienteFoto() {
+        if(listaFotos.hasNext()){
+            image = new Image("fxml/img/" + listaFotos.next().getUrl());
+            img.setImage(image);
+        }
+    }
+    public void anteriorFoto() {
+        if(listaFotos.hasPrevious()){
+            image = new Image("fxml/img/" + listaFotos.previous().getUrl());
+            img.setImage(image);
+        }
     }
     
     @FXML

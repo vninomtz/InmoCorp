@@ -35,7 +35,7 @@
             <Font size="16.0" />
          </font></JFXTextField>
       <JFXButton fx:id="btnSalir" layoutX="25.0" layoutY="371.0" onAction="#salir" prefHeight="27.0" prefWidth="70.0" style="-fx-background-color: #009688 #009688;" text="Salir" />
-      <JFXButton fx:id="btnSiguiente" layoutX="217.0" layoutY="255.0" prefWidth="30.0" text=" ">
+      <JFXButton fx:id="btnSiguiente" layoutX="217.0" layoutY="255.0" onAction="#siguienteFoto" prefWidth="30.0" text=" ">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -44,7 +44,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="btnAnterior" layoutX="14.0" layoutY="255.0" prefWidth="30.0" text=" ">
+      <JFXButton fx:id="btnAnterior" layoutX="14.0" layoutY="255.0" onAction="#anteriorFoto" prefWidth="30.0" text=" ">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
