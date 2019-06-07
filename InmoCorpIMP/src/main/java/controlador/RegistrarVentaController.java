@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javafx.application.Platform.exit;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -130,6 +131,10 @@ public class RegistrarVentaController implements Initializable {
 
     public void setComprador(Cliente comprador) {
         this.comprador = comprador;
+    }
+    @FXML
+    private void salir() {
+        exit();
     }
 
     @FXML

@@ -53,7 +53,7 @@
         <JFXButton fx:id="btnRegistrarVenta" buttonType="RAISED" layoutX="535.0" layoutY="518.0" onAction="#botonRegistrarVenta" prefHeight="25.0" prefWidth="171.0" ripplerFill="#404040" style="-fx-background-color: #009688;" text="Registrar Venta">
             
         </JFXButton>
-        <JFXButton fx:id="btnSalir" layoutX="735.0" layoutY="518.0" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: #009688;" text="Salir" />
+        <JFXButton fx:id="btnSalir" layoutX="735.0" layoutY="518.0" onAction="#salir" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: #009688;" text="Salir" />
       <MenuBar layoutX="14.0" layoutY="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <menus>
             <Menu mnemonicParsing="false" text="Ver">

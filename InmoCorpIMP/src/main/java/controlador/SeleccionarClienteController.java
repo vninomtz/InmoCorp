@@ -64,6 +64,11 @@ public class SeleccionarClienteController implements Initializable {
     public void setController(RegistrarRentaController controller){
        this.controllerRenta = controller;
     }
+    @FXML
+    private void salir() {
+        Stage principal = (Stage) btSalir.getScene().getWindow();
+            principal.close();
+    }
     
     @FXML
     private void botonSeleccionar(){

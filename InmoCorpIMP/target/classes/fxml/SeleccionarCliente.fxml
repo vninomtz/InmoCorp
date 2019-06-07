@@ -15,7 +15,7 @@
             <TableColumn fx:id="tcCorreo" prefWidth="160.0" text="Correo" />
         </columns>
       </TableView>
-      <JFXButton fx:id="btSalir" layoutX="34.0" layoutY="407.0" prefHeight="27.0" prefWidth="97.0" style="-fx-background-color: #009688 #009688;" text="Salir" />
+      <JFXButton fx:id="btSalir" layoutX="34.0" layoutY="407.0" onAction="#salir" prefHeight="27.0" prefWidth="97.0" style="-fx-background-color: #009688 #009688;" text="Salir" />
       <JFXButton fx:id="btSeleccionar" layoutX="167.0" layoutY="407.0" onAction="#botonSeleccionar" prefHeight="27.0" prefWidth="97.0" style="-fx-background-color: #009688 #009688;" text="Seleccionar" />
    </children>
 </AnchorPane>

@@ -35,7 +35,7 @@
             </Menu>
          </menus>
       </MenuBar>
-      <JFXButton fx:id="btnSalir" layoutX="23.0" layoutY="451.0" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: #009688;" text="Salir" />
+      <JFXButton fx:id="btnSalir" layoutX="23.0" layoutY="451.0" onAction="#salir" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: #009688;" text="Salir" />
       <ImageView fitHeight="111.0" fitWidth="150.0" layoutX="23.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="23.0">
          <image>
             <Image url="@img/Logo.png" />
