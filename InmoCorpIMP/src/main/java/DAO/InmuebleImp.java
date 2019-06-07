@@ -25,11 +25,11 @@ public class InmuebleImp implements IInmuebleDao{
         List<Inmueble> listaInmuebles = new ArrayList();
         Connection conexionBD = new ConexionBD().getConexionBD();
         String sQuery = "SELECT * from inmueble_detalles;";
-        String timeZone = "set global time_zone = '+3:00';";
+      
         System.out.println(sQuery);
         try {
             Statement statement = conexionBD.createStatement();
-            statement.execute(timeZone);
+           
             ResultSet rs = statement.executeQuery(sQuery);
             while (rs != null && rs.next()) {
                 Inmueble inmu = new Inmueble();

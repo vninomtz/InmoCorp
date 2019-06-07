@@ -248,13 +248,13 @@ public class RegistrarVentaController implements Initializable {
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Estado de registro");
                     alert.setHeaderText("Registro guardado exitosamente");
-
                     alert.showAndWait();
+                    ventanaPrincipal();
                 } else {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Estado de registro");
-                alert.setHeaderText("Ocurrio un erorr al guardar");
-                alert.showAndWait();
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Estado de registro");
+                    alert.setHeaderText("Ocurrio un erorr al guardar");
+                    alert.showAndWait();
 
                 }
 

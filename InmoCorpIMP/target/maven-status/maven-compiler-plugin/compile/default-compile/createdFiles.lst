@@ -15,6 +15,7 @@ controlador/RegistrarVentaController.class
 modelo/Cliente.class
 modelo/Venta.class
 DAO/TipoInmuebleImp.class
+controlador/InformacionDetalladaController.class
 controlador/RegistrarRentaController.class
 modelo/Inmueble.class
 controlador/InicioSesionController.class
